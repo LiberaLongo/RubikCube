@@ -15,17 +15,6 @@ private:
     int blue = LUMUS_MAXIMA;
 
 public:
-    //static member data
-    //colori di gioco
-    //primari
-    static const ColoreRGB Rosso;
-    static const ColoreRGB Giallo;
-    static const ColoreRGB Blu;
-    //secondari
-    static const ColoreRGB Arancio;
-    static const ColoreRGB Verde;
-    static const ColoreRGB Viola;
-
     //costruttore vuoto
     ColoreRGB(void);
     //costruttore completo

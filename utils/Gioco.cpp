@@ -1,6 +1,6 @@
 #include "../header/Gioco.hpp"
 
-float WIDTH = 1200.f, HEIGHT = 600.f;
+float WIDTH = 800.f, HEIGHT = 600.f;
 
 void impostazioniGioco(void)
 {

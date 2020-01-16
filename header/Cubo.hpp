@@ -7,6 +7,8 @@
 #include "./Punto.hpp"
 #include "./ColoreRGB.hpp"
 
+extern float WIDTH, HEIGHT;
+
 class Cubo : public DisegnabileI
 {
     private:
@@ -15,11 +17,13 @@ class Cubo : public DisegnabileI
         ColoreRGB F[DIM][DIM];
         ColoreRGB R[DIM][DIM];
         ColoreRGB U[DIM][DIM];
-        ColoreRGB L[DIM][DIM];
         ColoreRGB B[DIM][DIM];
+        ColoreRGB L[DIM][DIM];
         ColoreRGB D[DIM][DIM];
     private:
         //funzioni ausiliarie
+        //che crea una faccia di un colore
+        void creaFaccia(ColoreRGB faccia[DIM][DIM], ColoreRGB colore);
         //che ruotano 4 colori tra loro
         /*[t][x]
           [z][y]
@@ -29,6 +33,8 @@ class Cubo : public DisegnabileI
         //che ruota una intera faccia (senza modificare le facce vicine)
         void facciaOrario(ColoreRGB faccia[DIM][DIM]);
         void facciaAntiorario(ColoreRGB faccia[DIM][DIM]);
+        //disegna
+        void drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y);
     
     public:
         Cubo(void);

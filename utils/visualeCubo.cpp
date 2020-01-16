@@ -65,6 +65,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
         App.clear(sf::Color::Black);
 
         //disegna qui...
+        cubo.draw(App);
         //fine del frame corrente
         App.display();
     }
