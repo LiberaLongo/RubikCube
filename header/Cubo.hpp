@@ -29,10 +29,10 @@ class Cubo : public DisegnabileI
           [z][y]
         */
         void ruotaOrario(ColoreRGB& t, ColoreRGB& x, ColoreRGB& y, ColoreRGB& z);
-        void ruotaAntiorario(ColoreRGB& t, ColoreRGB& x, ColoreRGB& y, ColoreRGB& z);
+        void ruota_anti(ColoreRGB& t, ColoreRGB& x, ColoreRGB& y, ColoreRGB& z);
         //che ruota una intera faccia (senza modificare le facce vicine)
         void facciaOrario(ColoreRGB faccia[DIM][DIM]);
-        void facciaAntiorario(ColoreRGB faccia[DIM][DIM]);
+        void faccia_anti(ColoreRGB faccia[DIM][DIM]);
         //disegna
         void drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y);
     
@@ -46,15 +46,16 @@ class Cubo : public DisegnabileI
         void Back(void);
         void Left(void);
         void Down(void);
-        //ruota in senso Antiorario
-        void FrontAntiorario(void);
-        void RightAntiorario(void);
-        void UpAntiorario(void);
-        void BackAntiorario(void);
-        void LeftAntiorario(void);
-        void DownAntiorario(void);
+        //ruota in senso antiorario
+        void Front_anti(void);
+        void Right_anti(void);
+        void Up_anti(void);
+        void Back_anti(void);
+        void Left_anti(void);
+        void Down_anti(void);
         //disegna
-        void draw(sf::RenderWindow &window);
+        void draw2D(sf::RenderWindow &window);
+        void draw3D(sf::RenderWindow &window);
 };
 
 #endif //CUBO_HPP

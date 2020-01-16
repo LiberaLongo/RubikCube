@@ -39,6 +39,7 @@ Button::Button(float x, float y, string testo, float size)
     this->testo = testo;
     this->width = size;
     this->height = size;
+    this->charSize = size * 4 / 5;
     //e il resto di default
     this->settaFontTesto();
 }
@@ -49,6 +50,7 @@ Button::Button(float x, float y, string testo, float width, float height)
     this->testo = testo;
     this->width = width;
     this->height = height;
+    this->charSize = height * 4 / 5;
     //e il resto di default
     this->settaFontTesto();
 }

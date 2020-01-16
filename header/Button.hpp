@@ -18,8 +18,8 @@ private:
     float height = HEIGHT/8;
     float outlinesize = 1.f;
     float dist = 5.f;
-    ColoreRGB coloreTesto = ColoreRGB(LUMUS_MAXIMA, 0, 0); //rosso
-    ColoreRGB coloreSfondo = ColoreRGB(0, 0, LUMUS_MAXIMA); //blu
+    ColoreRGB coloreTesto = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, LUMUS_MAXIMA); //bianco
+    ColoreRGB coloreSfondo = ColoreRGB(0, 0, 0); //nero
     string testo = "";
     string fontName = "verdanab.ttf";
     sf::Font font;

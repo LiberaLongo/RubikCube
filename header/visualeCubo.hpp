@@ -6,6 +6,7 @@
 
 #include "./cScreen.hpp"
 #include "./Cubo.hpp"
+#include "./Button.hpp"
 
 class visualeCubo : public cScreen
 {
