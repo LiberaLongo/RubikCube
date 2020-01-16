@@ -21,7 +21,7 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
+OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(O)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
 
 #usare \ per file multiple
 
@@ -40,6 +40,9 @@ $(O)ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 
 $(O)Button.o: $(U)Button.cpp $(H)Button.hpp
 	$(COMPILE) $(U)Button.cpp -o $(O)Button.o
+
+$(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp
+	$(COMPILE) $(S)Cubo.cpp -o $(O)Cubo.o
 
 $(O)visualeMenu.o: $(U)visualeMenu.cpp $(H)visualeMenu.hpp
 	$(COMPILE) $(U)visualeMenu.cpp -o $(O)visualeMenu.o

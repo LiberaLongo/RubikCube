@@ -10,7 +10,7 @@ visualeCubo::visualeCubo(void)
 
 int visualeCubo::Run(sf::RenderWindow &App)
 {
-
+    Cubo cubo = Cubo();
     //comincia la trattazione della finestra
     bool Running = true;
     sf::Event event;
@@ -45,6 +45,17 @@ int visualeCubo::Run(sf::RenderWindow &App)
             case sf::Event::Closed:
                 return EXIT;
                 break;
+            //tastiera
+            case sf::Event::KeyPressed:
+                switch (event.key.code)
+                {
+                //tasto Esc
+                case sf::Keyboard::Escape:
+                    return VISUALE_MENU;
+                    break;
+                default:
+                    break;
+                }
             default:
                 break;
             }

@@ -5,8 +5,7 @@
 #include <iostream>
 
 #include "./cScreen.hpp"
-#include "./Punto.hpp"
-#include "./ColoreRGB.hpp"
+#include "./Cubo.hpp"
 
 class visualeCubo : public cScreen
 {
