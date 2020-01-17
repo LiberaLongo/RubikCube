@@ -1,0 +1,9 @@
+    drawTessera3D(window, x + altezza * 2, y + size, SOTTO, D[0][0], size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, SOTTO, D[0][1], size);
+    drawTessera3D(window, x, y + size * 2, SOTTO, D[0][2], size);
+    drawTessera3D(window, x + altezza, y + size / 2, SOTTO, D[1][0], size);
+    drawTessera3D(window, x, y + size, SOTTO, D[1][1], size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, SOTTO, D[1][2], size);
+    drawTessera3D(window, x, y, SOTTO, D[2][0], size);
+    drawTessera3D(window, x - altezza, y + size / 2, SOTTO, D[2][1], size);
+    drawTessera3D(window, x - altezza * 2, y + size, SOTTO, D[2][2], size);

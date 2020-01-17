@@ -14,6 +14,9 @@
 #define BACK    300
 #define LEFT    60
 #define DOWN    180
+#define DESTRA   LEFT
+#define SINISTRA BACK
+#define SOTTO    DOWN
 
 extern float WIDTH, HEIGHT;
 

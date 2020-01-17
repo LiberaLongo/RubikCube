@@ -261,6 +261,37 @@ void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float 
     exagon.setFillColor(sf::Color::Magenta);
     window.draw(exagon);
     //cutted
+    float altezza = size * sqrt(3) / 2;
+    //BACK -> destra
+    drawTessera3D(window, x, y, DESTRA, B[0][0], size);
+    drawTessera3D(window, x, y - size, DESTRA, B[0][1], size);
+    drawTessera3D(window, x, y - size * 2, DESTRA, B[0][2], size);
+    drawTessera3D(window, x + altezza, y + size / 2, DESTRA, B[1][0], size);
+    drawTessera3D(window, x + altezza, y - size / 2, DESTRA, B[1][1], size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, DESTRA, B[1][2], size);
+    drawTessera3D(window, x + altezza * 2, y + size, DESTRA, B[2][0], size);
+    drawTessera3D(window, x + altezza * 2, y, DESTRA, B[2][1], size);
+    drawTessera3D(window, x + altezza * 2, y - size, DESTRA, B[2][2], size);
+    //LEFT -> sinistra
+    drawTessera3D(window, x, y, SINISTRA, L[0][0], size);
+    drawTessera3D(window, x - altezza, y + size / 2, SINISTRA, L[0][1], size);
+    drawTessera3D(window, x - altezza * 2, y + size, SINISTRA, L[0][2], size);
+    drawTessera3D(window, x, y - size, SINISTRA, L[1][0], size);
+    drawTessera3D(window, x - altezza, y - size / 2, SINISTRA, L[1][1], size);
+    drawTessera3D(window, x - altezza * 2, y, SINISTRA, L[1][2], size);
+    drawTessera3D(window, x, y - size * 2, SINISTRA, L[2][0], size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, SINISTRA, L[2][1], size);
+    drawTessera3D(window, x - altezza * 2, y - size, SINISTRA, L[2][2], size);
+    //DOWN
+    drawTessera3D(window, x + altezza * 2, y + size, SOTTO, D[0][0], size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, SOTTO, D[0][1], size);
+    drawTessera3D(window, x, y + size * 2, SOTTO, D[0][2], size);
+    drawTessera3D(window, x + altezza, y + size / 2, SOTTO, D[1][0], size);
+    drawTessera3D(window, x, y + size, SOTTO, D[1][1], size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, SOTTO, D[1][2], size);
+    drawTessera3D(window, x, y, SOTTO, D[2][0], size);
+    drawTessera3D(window, x - altezza, y + size / 2, SOTTO, D[2][1], size);
+    drawTessera3D(window, x - altezza * 2, y + size, SOTTO, D[2][2], size);
 }
 
 void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size)
