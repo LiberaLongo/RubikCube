@@ -154,10 +154,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
             arrayButton[i].draw(App);
         }
         buttonReset.draw(App);
-        float lato = HEIGHT/4, dist = 10.f;
-        cubo.draw2D(App, WIDTH/2, HEIGHT/4, WIDTH/(2*12));
-        cubo.draw_3D_FRU(App, 0.f+lato, dist+lato, lato/3);
-        cubo.draw_3D_BLD(App, lato*3/2, lato*3 - dist, lato/3);
+        cubo.draw(App, 0.f, 0.f, HEIGHT/4);
         //fine del frame corrente
         App.display();
     }

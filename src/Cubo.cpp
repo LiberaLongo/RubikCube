@@ -222,41 +222,81 @@ void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
 {
     float altezza = size * sqrt(3) / 2;
     //FRONT
-    drawTessera3D(window, x-altezza*2   , y-size        , FRONT, F[0][0], size);
-    drawTessera3D(window, x-altezza*2   , y             , FRONT, F[0][1], size);
-    drawTessera3D(window, x-altezza*2   , y+size        , FRONT, F[0][2], size);
-    drawTessera3D(window, x-altezza     , y-size/2      , FRONT, F[1][0], size);
-    drawTessera3D(window, x-altezza     , y+size/2      , FRONT, F[1][1], size);
-    drawTessera3D(window, x-altezza     , y+size*3/2    , FRONT, F[1][2], size);
-    drawTessera3D(window, x             , y             , FRONT, F[2][0], size);
-    drawTessera3D(window, x             , y+size        , FRONT, F[2][1], size);
-    drawTessera3D(window, x             , y+size*2      , FRONT, F[2][2], size);
+    drawTessera3D(window, x - altezza * 2, y - size, FRONT, F[0][0], size);
+    drawTessera3D(window, x - altezza * 2, y, FRONT, F[0][1], size);
+    drawTessera3D(window, x - altezza * 2, y + size, FRONT, F[0][2], size);
+    drawTessera3D(window, x - altezza, y - size / 2, FRONT, F[1][0], size);
+    drawTessera3D(window, x - altezza, y + size / 2, FRONT, F[1][1], size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, FRONT, F[1][2], size);
+    drawTessera3D(window, x, y, FRONT, F[2][0], size);
+    drawTessera3D(window, x, y + size, FRONT, F[2][1], size);
+    drawTessera3D(window, x, y + size * 2, FRONT, F[2][2], size);
     //RIGHT
-    drawTessera3D(window, x+altezza*2   , y-size        , RIGHT, R[0][0], size);
-    drawTessera3D(window, x+altezza     , y-size/2      , RIGHT, R[0][1], size);
-    drawTessera3D(window, x             , y             , RIGHT, R[0][2], size);
-    drawTessera3D(window, x+altezza*2   , y             , RIGHT, R[1][0], size);
-    drawTessera3D(window, x+altezza     , y+size/2      , RIGHT, R[1][1], size);
-    drawTessera3D(window, x             , y+size        , RIGHT, R[1][2], size);
-    drawTessera3D(window, x+altezza*2   , y+size        , RIGHT, R[2][0], size);
-    drawTessera3D(window, x+altezza     , y+size*3/2    , RIGHT, R[2][1], size);
-    drawTessera3D(window, x             , y+size*2      , RIGHT, R[2][2], size);
+    drawTessera3D(window, x + altezza * 2, y - size, RIGHT, R[0][0], size);
+    drawTessera3D(window, x + altezza, y - size / 2, RIGHT, R[0][1], size);
+    drawTessera3D(window, x, y, RIGHT, R[0][2], size);
+    drawTessera3D(window, x + altezza * 2, y, RIGHT, R[1][0], size);
+    drawTessera3D(window, x + altezza, y + size / 2, RIGHT, R[1][1], size);
+    drawTessera3D(window, x, y + size, RIGHT, R[1][2], size);
+    drawTessera3D(window, x + altezza * 2, y + size, RIGHT, R[2][0], size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, RIGHT, R[2][1], size);
+    drawTessera3D(window, x, y + size * 2, RIGHT, R[2][2], size);
     //UP
-    drawTessera3D(window, x             , y-size*2      , UP, U[0][0], size);
-    drawTessera3D(window, x-altezza     , y-size*3/2    , UP, U[0][1], size);
-    drawTessera3D(window, x-altezza*2   , y-size        , UP, U[0][2], size);
-    drawTessera3D(window, x+altezza     , y-size*3/2    , UP, U[1][0], size);
-    drawTessera3D(window, x             , y-size        , UP, U[1][1], size);
-    drawTessera3D(window, x-altezza     , y-size/2      , UP, U[1][2], size);
-    drawTessera3D(window, x+altezza*2   , y-size        , UP, U[2][0], size);
-    drawTessera3D(window, x+altezza     , y-size/2      , UP, U[2][1], size);
-    drawTessera3D(window, x             , y             , UP, U[2][2], size);
+    drawTessera3D(window, x, y - size * 2, UP, U[0][0], size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, UP, U[0][1], size);
+    drawTessera3D(window, x - altezza * 2, y - size, UP, U[0][2], size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, UP, U[1][0], size);
+    drawTessera3D(window, x, y - size, UP, U[1][1], size);
+    drawTessera3D(window, x - altezza, y - size / 2, UP, U[1][2], size);
+    drawTessera3D(window, x + altezza * 2, y - size, UP, U[2][0], size);
+    drawTessera3D(window, x + altezza, y - size / 2, UP, U[2][1], size);
+    drawTessera3D(window, x, y, UP, U[2][2], size);
 }
 
 void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size)
 {
-    sf::CircleShape exagon(size*3, 6);
-    exagon.setPosition({x-size*3, y-size*3});
+    sf::CircleShape exagon(size * 3, 6);
+    exagon.setPosition({x - size * 3, y - size * 3});
     exagon.setFillColor(sf::Color::Magenta);
     window.draw(exagon);
+
+    float altezza = size * sqrt(3) / 2;
+    //BACK
+    drawTessera3D(window, x, y, BACK, B[0][0], size);
+    drawTessera3D(window, x, y - size, BACK, B[0][1], size);
+    drawTessera3D(window, x, y - size * 2, BACK, B[0][2], size);
+    drawTessera3D(window, x - altezza, y - size / 2, BACK, B[1][0], size);
+    drawTessera3D(window, x - altezza, y + size / 2, BACK, B[1][1], size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, BACK, B[1][2], size);
+    drawTessera3D(window, x - altezza * 2, y + size, BACK, B[2][0], size);
+    drawTessera3D(window, x - altezza * 2, y, BACK, B[2][1], size);
+    drawTessera3D(window, x - altezza * 2, y - size, BACK, B[2][2], size);
+    //LEFT
+    drawTessera3D(window, x, y, LEFT, L[0][0], size);
+    drawTessera3D(window, x + altezza, y + size / 2, LEFT, L[0][1], size);
+    drawTessera3D(window, x + altezza * 2, y + size, LEFT, L[0][2], size);
+    drawTessera3D(window, x, y - size, LEFT, L[1][0], size);
+    drawTessera3D(window, x + altezza, y - size / 2, LEFT, L[1][1], size);
+    drawTessera3D(window, x + altezza * 2, y, LEFT, L[1][2], size);
+    drawTessera3D(window, x, y - size * 2, LEFT, L[2][0], size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, LEFT, L[2][1], size);
+    drawTessera3D(window, x + altezza * 2, y - size, LEFT, L[2][2], size);
+    //DOWN
+    drawTessera3D(window, x - altezza * 2, y + size, DOWN, D[0][0], size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, DOWN, D[0][1], size);
+    drawTessera3D(window, x, y + size * 2, DOWN, D[0][2], size);
+    drawTessera3D(window, x - altezza, y + size / 2, DOWN, D[1][0], size);
+    drawTessera3D(window, x, y + size, DOWN, D[1][1], size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, DOWN, D[1][2], size);
+    drawTessera3D(window, x, y, DOWN, D[2][0], size);
+    drawTessera3D(window, x + altezza, y + size / 2, DOWN, D[2][1], size);
+    drawTessera3D(window, x + altezza * 2, y + size, DOWN, D[2][2], size);
+}
+
+void Cubo::draw(sf::RenderWindow &window, float x, float y, float lato)
+{
+    float dist = 10.f, size = lato/3;
+    this->draw2D(window, WIDTH / 2, HEIGHT / 4, size*2/3);
+    this->draw_3D_FRU(window, x + lato, y + dist + lato, size);
+    this->draw_3D_BLD(window, x + lato * 3 / 2, y + lato * 3 - dist, size);
 }

@@ -63,10 +63,12 @@ class Cubo : public DisegnabileI
         void Back_anti(void);
         void Left_anti(void);
         void Down_anti(void);
-        //disegna
+        //disegna le varie visuali
         void draw2D(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size);
+        //disegna tutto
+        void draw(sf::RenderWindow &window, float x, float y, float lato);
 };
 
 #endif //CUBO_HPP
