@@ -20,7 +20,7 @@ int Gioco(void)
 	int screen = 0;
 
 	//Window creation
-	sf::RenderWindow App(sf::VideoMode(WIDTH, HEIGHT), "SFML nonGravitar");
+	sf::RenderWindow App(sf::VideoMode(WIDTH, HEIGHT), "SFML RubiKube by LLibera");
 
 	//Preparazione delle visuali
 	visualeMenu vM;
