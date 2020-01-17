@@ -66,7 +66,8 @@ class Cubo : public DisegnabileI
         //disegna le varie visuali
         void draw2D(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);
-        void draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size);
+        void draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size);
+        void draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size);
         //disegna tutto
         void draw(sf::RenderWindow &window, float x, float y, float lato);
 };

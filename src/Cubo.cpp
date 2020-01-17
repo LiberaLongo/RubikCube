@@ -253,13 +253,19 @@ void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
     drawTessera3D(window, x, y, UP, U[2][2], size);
 }
 
-void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size)
+void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size)
 {
+    //visuale ottenuta "tagliando il cubo" come fosse una camera su thesims
     sf::CircleShape exagon(size * 3, 6);
     exagon.setPosition({x - size * 3, y - size * 3});
     exagon.setFillColor(sf::Color::Magenta);
     window.draw(exagon);
+    //cutted
+}
 
+void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size)
+{
+    //visuale ottenuta ruotando il cubo
     float altezza = size * sqrt(3) / 2;
     //BACK
     drawTessera3D(window, x, y, BACK, B[0][0], size);
@@ -295,8 +301,9 @@ void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size)
 
 void Cubo::draw(sf::RenderWindow &window, float x, float y, float lato)
 {
-    float dist = 10.f, size = lato/3;
-    this->draw2D(window, WIDTH / 2, HEIGHT / 4, size*2/3);
-    this->draw_3D_FRU(window, x + lato, y + dist + lato, size);
-    this->draw_3D_BLD(window, x + lato * 3 / 2, y + lato * 3 - dist, size);
+    float dist = 10.f, size = lato / 3;
+    this->draw2D(window, WIDTH / 2 - dist*3, HEIGHT /3 - dist*2, size * 2 / 3);
+    this->draw_3D_FRU(window, x + lato * 3 / 2, y + dist + lato, size);
+    this->draw_3D_BLD_rotated(window, x + WIDTH * 5/6, y + HEIGHT*4/5 , size / 2);
+    this->draw_3D_BLD_cutted(window, x + lato , y + lato * 3 - dist, size);
 }

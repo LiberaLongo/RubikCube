@@ -3,9 +3,13 @@ progetto programmazione fatto per piacere personale
 incentrato sul simulare la rotazione del cubo di rubik tramite pulsanti
 (senza animazioni per la mossa) con più visuali per comprendere come è messo il cubo
 quella 2D è dall'alto e ogni faccia si ottiene ruotando il cubo a partire dal viola
-sopra e rosso davanti, le due 3D si ottengono tenendo il cubo con due dito guardando il bianco il rosso e il blu e l'altro dalla parte opposta
-(spigolo1 tra i centri bianco arancione e verde
-spigolo 2 tra i centri rosso blu giallo)
+sopra e rosso davanti, le tre visuali 3D si ottengono:
+(tenendo il cubo con due dita guardando il bianco, il rosso e il blu, e l'altro dito dalla parte opposta.
+(un dito sullo spigolo1 tra i centri bianco arancione e verde,
+e l'altro dito sullo spigolo2 tra i centri rosso blu giallo))
+1. (la grande sopra) guardando sopra il centro bianco, rosso, blu;
+2. (la piccola) girando il cubo;
+3. (la grande sotto) "tagliando" il cubo come se vedessimo l'interno di una stanza.
 
 viene utilizzata la libreria SFML per la grafica in C++.
 

@@ -15,7 +15,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
     sf::Event event;
 
     //bottone per reset
-    Button buttonReset = Button(WIDTH*5/8, HEIGHT*7/9, "Reset");
+    Button buttonReset = Button(WIDTH/2 - 100.f, HEIGHT*4/5+20.f, "Reset");
     //bottoni per le mosse
     int mossa = -1;
     float x_or = WIDTH / 2, y_or = 0.f;
