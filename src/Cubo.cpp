@@ -48,16 +48,16 @@ void Cubo::faccia_anti(ColoreRGB faccia[DIM][DIM])
     ruota_anti(faccia[1][0], faccia[2][1], faccia[1][2], faccia[0][1]);
 }
 //disegna
-void Cubo::drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y)
+void Cubo::drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y, float size)
 {
     for (int i = 0; i < DIM; i++)
         for (int j = 0; j < DIM; j++)
         {
             //coordinate
-            float xi = x + i * this->size;
-            float yj = y + j * this->size;
+            float xi = x + i * size;
+            float yj = y + j * size;
             //quadrato
-            sf::RectangleShape tessera(sf::Vector2f(this->size, this->size));
+            sf::RectangleShape tessera(sf::Vector2f(size, size));
             //posizione
             tessera.setPosition(xi, yj);
             //colore
@@ -72,12 +72,11 @@ void Cubo::drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], floa
 //PUBLIC
 Cubo::Cubo(void)
 {
-    //dimensione del cubo
-    this->size = min(WIDTH / 12, HEIGHT / 9);
     this->Reset();
 }
 //resetta
-void Cubo::Reset(void) {
+void Cubo::Reset(void)
+{
     //colori delle facce
     ColoreRGB rosso = ColoreRGB(LUMUS_MAXIMA, 0, 0);
     ColoreRGB blu = ColoreRGB(0, 0, LUMUS_MAXIMA);
@@ -92,7 +91,6 @@ void Cubo::Reset(void) {
     creaFaccia(this->B, arancio);
     creaFaccia(this->L, verde);
     creaFaccia(this->D, giallo);
-
 }
 //ruota in senso Orario
 void Cubo::Front(void)
@@ -181,21 +179,29 @@ void Cubo::Down_anti(void)
     ruota_anti(this->F[2][2], this->R[2][0], this->B[0][0], this->L[0][2]);
 }
 //disegna
-void Cubo::draw2D(sf::RenderWindow &window)
+void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
 {
-    //coordinate
-    float x = 0.f;
-    float y = 0.f;
     //lunghezza del lato
-    float lato = this->size * DIM;
-    drawFaccia(window, this->F, x + 1 * lato, y + 2 * lato);
-    drawFaccia(window, this->R, x + 2 * lato, y + 1 * lato);
-    drawFaccia(window, this->U, x + 1 * lato, y + 1 * lato);
-    drawFaccia(window, this->B, x + 1 * lato, y + 0 * lato);
-    drawFaccia(window, this->L, x + 0 * lato, y + 1 * lato);
-    drawFaccia(window, this->D, x + 3 * lato, y + 1 * lato);
+    float lato = size * DIM;
+    drawFaccia(window, this->F, x + 1 * lato, y + 2 * lato, size);
+    drawFaccia(window, this->R, x + 2 * lato, y + 1 * lato, size);
+    drawFaccia(window, this->U, x + 1 * lato, y + 1 * lato, size);
+    drawFaccia(window, this->B, x + 1 * lato, y + 0 * lato, size);
+    drawFaccia(window, this->L, x + 0 * lato, y + 1 * lato, size);
+    drawFaccia(window, this->D, x + 3 * lato, y + 1 * lato, size);
 }
-void Cubo::draw3D(sf::RenderWindow &window)
+void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float lato)
 {
-    //TO DO
+    sf::CircleShape exagon(lato, 6);
+    exagon.setPosition({x, y});
+    exagon.setFillColor(sf::Color::Cyan);
+    window.draw(exagon);
+}
+
+void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float lato)
+{
+    sf::CircleShape exagon(lato, 6);
+    exagon.setPosition({x, y});
+    exagon.setFillColor(sf::Color::Magenta);
+    window.draw(exagon);
 }

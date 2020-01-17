@@ -62,6 +62,8 @@ int visualeCubo::Run(sf::RenderWindow &App)
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                 if(buttonReset.checkMouse(mouseClick)) {
                     cubo.Reset();
+                    haCliccato = true;
+                    mossa = -1;
                 }
                 else
                 //controlla quale bottone è stato premuto
@@ -138,8 +140,12 @@ int visualeCubo::Run(sf::RenderWindow &App)
         {
             arrayButton[i].setChecked(false);
         }
+        buttonReset.setChecked(false);
         if(mossa != -1)
             arrayButton[mossa].setChecked(true);
+        else
+            buttonReset.setChecked(true);
+        
         //pulisci la finestra colorandola di nero
         App.clear(sf::Color::Black);
         //disegna qui...
@@ -148,7 +154,10 @@ int visualeCubo::Run(sf::RenderWindow &App)
             arrayButton[i].draw(App);
         }
         buttonReset.draw(App);
-        cubo.draw2D(App);
+        float size = HEIGHT/4, dist = 10.f;
+        cubo.draw2D(App, WIDTH/2, HEIGHT/4, WIDTH/(2*12));
+        cubo.draw_3D_FRU(App, 0.f, dist, size);
+        cubo.draw_3D_BLD(App, size/2, size*2 - dist, size);
         //fine del frame corrente
         App.display();
     }

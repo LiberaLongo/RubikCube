@@ -12,7 +12,6 @@ extern float WIDTH, HEIGHT;
 class Cubo : public DisegnabileI
 {
     private:
-        float size = 20.f;
         //facce
         ColoreRGB F[DIM][DIM];
         ColoreRGB R[DIM][DIM];
@@ -34,7 +33,7 @@ class Cubo : public DisegnabileI
         void facciaOrario(ColoreRGB faccia[DIM][DIM]);
         void faccia_anti(ColoreRGB faccia[DIM][DIM]);
         //disegna
-        void drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y);
+        void drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y, float size);
     
     public:
         Cubo(void);
@@ -56,8 +55,9 @@ class Cubo : public DisegnabileI
         void Left_anti(void);
         void Down_anti(void);
         //disegna
-        void draw2D(sf::RenderWindow &window);
-        void draw3D(sf::RenderWindow &window);
+        void draw2D(sf::RenderWindow &window, float x, float y, float size);
+        void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);
+        void draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size);
 };
 
 #endif //CUBO_HPP

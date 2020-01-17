@@ -47,8 +47,8 @@ $(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp
 $(O)visualeMenu.o: $(U)visualeMenu.cpp $(H)visualeMenu.hpp
 	$(COMPILE) $(U)visualeMenu.cpp -o $(O)visualeMenu.o
 
-$(O)visualeCubo.o: $(U)visualeCubo.cpp $(H)visualeCubo.hpp
-	$(COMPILE) $(U)visualeCubo.cpp -o $(O)visualeCubo.o
+$(O)visualeCubo.o: $(S)visualeCubo.cpp $(H)visualeCubo.hpp
+	$(COMPILE) $(S)visualeCubo.cpp -o $(O)visualeCubo.o
 
 $(O)Gioco.o: $(U)Gioco.cpp $(H)Gioco.hpp
 	$(COMPILE) $(U)Gioco.cpp -o $(O)Gioco.o
