@@ -69,6 +69,34 @@ void Cubo::drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], floa
         }
 }
 
+void Cubo::drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, float lato)
+{
+    //l'altezza del triangolo equilatero che forma "metà" tessera 3D
+    float mezzoLato = lato / 2;
+    float altezza = lato * sqrt(3) / 2;
+    //non ho capito pk devo traslare...
+    //x = x + altezza;
+    // create an empty shape
+    sf::ConvexShape convex;
+    // resize it to 5 points
+    convex.setPointCount(4);
+    // define the points
+    convex.setPoint(0, sf::Vector2f(0.f, -lato));
+    convex.setPoint(1, sf::Vector2f(+altezza, -mezzoLato));
+    convex.setPoint(2, sf::Vector2f(0.f, 0.f));
+    convex.setPoint(3, sf::Vector2f(-altezza, -mezzoLato));
+
+    //colore
+    convex.setFillColor(colore.getColorLib());
+    //orienta
+    convex.setRotation(angolo);
+    convex.setPosition(x, y);
+    //setta un bordo di 1 all'interno del quadrato
+    convex.setOutlineThickness(-1);
+    //disegna
+    window.draw(convex);
+}
+
 //PUBLIC
 Cubo::Cubo(void)
 {
@@ -190,18 +218,49 @@ void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
     drawFaccia(window, this->L, x + 0 * lato, y + 1 * lato, size);
     drawFaccia(window, this->D, x + 3 * lato, y + 1 * lato, size);
 }
-void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float lato)
+void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
 {
-    sf::CircleShape exagon(lato, 6);
-    exagon.setPosition({x, y});
+    sf::CircleShape exagon(size*3, 6);
+    exagon.setPosition({x-size*3, y-size*3});
     exagon.setFillColor(sf::Color::Cyan);
     window.draw(exagon);
+    float altezza = size * sqrt(3) / 2;
+    //FRONT
+    drawTessera3D(window, x, y, FRONT, F[0][0], size);
+    drawTessera3D(window, x, y, FRONT, F[0][1], size);
+    drawTessera3D(window, x, y, FRONT, F[0][2], size);
+    drawTessera3D(window, x, y, FRONT, F[1][0], size);
+    drawTessera3D(window, x, y, FRONT, F[1][1], size);
+    drawTessera3D(window, x, y, FRONT, F[1][2], size);
+    drawTessera3D(window, x, y, FRONT, F[2][0], size);
+    drawTessera3D(window, x, y, FRONT, F[2][1], size);
+    drawTessera3D(window, x, y, FRONT, F[2][2], size);
+    //RIGHT
+    drawTessera3D(window, x, y, RIGHT, R[0][0], size);
+    drawTessera3D(window, x, y, RIGHT, R[0][1], size);
+    drawTessera3D(window, x, y, RIGHT, R[0][2], size);
+    drawTessera3D(window, x, y, RIGHT, R[1][0], size);
+    drawTessera3D(window, x, y, RIGHT, R[1][1], size);
+    drawTessera3D(window, x, y, RIGHT, R[1][2], size);
+    drawTessera3D(window, x, y, RIGHT, R[2][0], size);
+    drawTessera3D(window, x, y, RIGHT, R[2][1], size);
+    drawTessera3D(window, x, y, RIGHT, R[2][2], size);
+    //UP
+    drawTessera3D(window, x             , y-2*size      , UP, U[0][0], size);
+    drawTessera3D(window, x-altezza     , y-size*3/2    , UP, U[0][1], size);
+    drawTessera3D(window, x-altezza*2   , y-size        , UP, U[0][2], size);
+    drawTessera3D(window, x+altezza     , y-size*3/2    , UP, U[1][0], size);
+    drawTessera3D(window, x             , y-size        , UP, U[1][1], size);
+    drawTessera3D(window, x-altezza     , y-size/2      , UP, U[1][2], size);
+    drawTessera3D(window, x, y, UP, U[2][0], size);
+    drawTessera3D(window, x, y, UP, U[2][1], size);
+    drawTessera3D(window, x, y, UP, U[2][2], size);
 }
 
-void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float lato)
+void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size)
 {
-    sf::CircleShape exagon(lato, 6);
-    exagon.setPosition({x, y});
+    sf::CircleShape exagon(size*3, 6);
+    exagon.setPosition({x-size*3, y-size*3});
     exagon.setFillColor(sf::Color::Magenta);
     window.draw(exagon);
 }

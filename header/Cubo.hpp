@@ -1,11 +1,19 @@
 #ifndef CUBO_HPP
 #define CUBO_HPP
 
-#define DIM 3
-
 #include "./DisegnabileI.hpp"
 #include "./Punto.hpp"
 #include "./ColoreRGB.hpp"
+
+#define DIM 3 //cubo di Rubik 3x3
+
+//angoli di rotazione per avere le tessere della faccia giusta
+#define FRONT   240
+#define RIGHT   120
+#define UP      0
+#define BACK    300
+#define LEFT    60
+#define DOWN    180
 
 extern float WIDTH, HEIGHT;
 
@@ -34,6 +42,7 @@ class Cubo : public DisegnabileI
         void faccia_anti(ColoreRGB faccia[DIM][DIM]);
         //disegna
         void drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y, float size);
+        void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, float lato);
     
     public:
         Cubo(void);
