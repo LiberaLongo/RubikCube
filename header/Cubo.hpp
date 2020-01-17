@@ -39,6 +39,8 @@ class Cubo : public DisegnabileI
     public:
         Cubo(void);
         virtual ~Cubo(void) {};
+        //resetta
+        void Reset(void);
         //ruota in senso Orario
         void Front(void);
         void Right(void);

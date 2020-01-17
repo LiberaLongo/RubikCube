@@ -15,7 +15,7 @@ void Cubo::creaFaccia(ColoreRGB faccia[DIM][DIM], ColoreRGB colore)
 void Cubo::ruotaOrario(ColoreRGB &t, ColoreRGB &x, ColoreRGB &y, ColoreRGB &z)
 {
     /*[t][x] --> [z][t]
-  [z][y]     [y][x]*/
+      [z][y]     [y][x]*/
     ColoreRGB temp = t;
     t = z;
     z = y;
@@ -25,7 +25,7 @@ void Cubo::ruotaOrario(ColoreRGB &t, ColoreRGB &x, ColoreRGB &y, ColoreRGB &z)
 void Cubo::ruota_anti(ColoreRGB &t, ColoreRGB &x, ColoreRGB &y, ColoreRGB &z)
 {
     /*[t][x] --> [x][y]
-  [z][y]     [t][z]*/
+      [z][y]     [t][z]*/
     ColoreRGB temp = t;
     t = x;
     x = y;
@@ -74,6 +74,10 @@ Cubo::Cubo(void)
 {
     //dimensione del cubo
     this->size = min(WIDTH / 12, HEIGHT / 9);
+    this->Reset();
+}
+//resetta
+void Cubo::Reset(void) {
     //colori delle facce
     ColoreRGB rosso = ColoreRGB(LUMUS_MAXIMA, 0, 0);
     ColoreRGB blu = ColoreRGB(0, 0, LUMUS_MAXIMA);
@@ -88,68 +92,93 @@ Cubo::Cubo(void)
     creaFaccia(this->B, arancio);
     creaFaccia(this->L, verde);
     creaFaccia(this->D, giallo);
+
 }
 //ruota in senso Orario
 void Cubo::Front(void)
 {
     facciaOrario(this->F);
-    //TO DO
+    ruotaOrario(this->U[0][2], this->R[0][2], this->D[0][2], this->L[0][2]);
+    ruotaOrario(this->U[1][2], this->R[1][2], this->D[1][2], this->L[1][2]);
+    ruotaOrario(this->U[2][2], this->R[2][2], this->D[2][2], this->L[2][2]);
 }
 void Cubo::Right(void)
 {
     facciaOrario(this->R);
-    //TO DO
+    ruotaOrario(this->U[2][0], this->B[2][0], this->D[0][2], this->F[2][0]);
+    ruotaOrario(this->U[2][1], this->B[2][1], this->D[0][1], this->F[2][1]);
+    ruotaOrario(this->U[2][2], this->B[2][2], this->D[0][0], this->F[2][2]);
 }
 void Cubo::Up(void)
 {
     facciaOrario(this->U);
-    //TO DO
+    ruotaOrario(this->F[0][0], this->L[2][0], this->B[2][2], this->R[0][2]);
+    ruotaOrario(this->F[1][0], this->L[2][1], this->B[1][2], this->R[0][1]);
+    ruotaOrario(this->F[2][0], this->L[2][2], this->B[0][2], this->R[0][0]);
 }
 void Cubo::Back(void)
 {
     facciaOrario(this->B);
-    //TO DO
+    ruotaOrario(this->U[0][0], this->L[0][0], this->D[0][0], this->R[0][0]);
+    ruotaOrario(this->U[1][0], this->L[1][0], this->D[1][0], this->R[1][0]);
+    ruotaOrario(this->U[2][0], this->L[2][0], this->D[2][0], this->R[2][0]);
 }
 void Cubo::Left(void)
 {
     facciaOrario(this->L);
-    //TO DO
+    ruotaOrario(this->U[0][0], this->F[0][0], this->D[2][2], this->B[0][0]);
+    ruotaOrario(this->U[0][1], this->F[0][1], this->D[2][1], this->B[0][1]);
+    ruotaOrario(this->U[0][2], this->F[0][2], this->D[2][0], this->B[0][2]);
 }
 void Cubo::Down(void)
 {
     facciaOrario(this->D);
-    //TO DO
+    ruotaOrario(this->F[0][2], this->R[2][2], this->B[2][0], this->L[0][0]);
+    ruotaOrario(this->F[1][2], this->R[2][1], this->B[1][0], this->L[0][1]);
+    ruotaOrario(this->F[2][2], this->R[2][0], this->B[0][0], this->L[0][2]);
 }
 //ruota in senso antiorario
 void Cubo::Front_anti(void)
 {
     faccia_anti(this->F);
-    //TO DO
+    ruota_anti(this->U[0][2], this->R[0][2], this->D[0][2], this->L[0][2]);
+    ruota_anti(this->U[1][2], this->R[1][2], this->D[1][2], this->L[1][2]);
+    ruota_anti(this->U[2][2], this->R[2][2], this->D[2][2], this->L[2][2]);
 }
 void Cubo::Right_anti(void)
 {
     faccia_anti(this->R);
-    //TO DO
+    ruota_anti(this->U[2][0], this->B[2][0], this->D[0][2], this->F[2][0]);
+    ruota_anti(this->U[2][1], this->B[2][1], this->D[0][1], this->F[2][1]);
+    ruota_anti(this->U[2][2], this->B[2][2], this->D[0][0], this->F[2][2]);
 }
 void Cubo::Up_anti(void)
 {
     faccia_anti(this->U);
-    //TO DO
+    ruota_anti(this->F[0][0], this->L[2][0], this->B[2][2], this->R[0][2]);
+    ruota_anti(this->F[1][0], this->L[2][1], this->B[1][2], this->R[0][1]);
+    ruota_anti(this->F[2][0], this->L[2][2], this->B[0][2], this->R[0][0]);
 }
 void Cubo::Back_anti(void)
 {
     faccia_anti(this->B);
-    //TO DO
+    ruota_anti(this->U[0][0], this->L[0][0], this->D[0][0], this->R[0][0]);
+    ruota_anti(this->U[1][0], this->L[1][0], this->D[1][0], this->R[1][0]);
+    ruota_anti(this->U[2][0], this->L[2][0], this->D[2][0], this->R[2][0]);
 }
 void Cubo::Left_anti(void)
 {
     faccia_anti(this->L);
-    //TO DO
+    ruota_anti(this->U[0][0], this->F[0][0], this->D[2][2], this->B[0][0]);
+    ruota_anti(this->U[0][1], this->F[0][1], this->D[2][1], this->B[0][1]);
+    ruota_anti(this->U[0][2], this->F[0][2], this->D[2][0], this->B[0][2]);
 }
 void Cubo::Down_anti(void)
 {
     faccia_anti(this->D);
-    //TO DO
+    ruota_anti(this->F[0][2], this->R[2][2], this->B[2][0], this->L[0][0]);
+    ruota_anti(this->F[1][2], this->R[2][1], this->B[1][0], this->L[0][1]);
+    ruota_anti(this->F[2][2], this->R[2][0], this->B[0][0], this->L[0][2]);
 }
 //disegna
 void Cubo::draw2D(sf::RenderWindow &window)
@@ -161,10 +190,10 @@ void Cubo::draw2D(sf::RenderWindow &window)
     float lato = this->size * DIM;
     drawFaccia(window, this->F, x + 1 * lato, y + 2 * lato);
     drawFaccia(window, this->R, x + 2 * lato, y + 1 * lato);
-    drawFaccia(window, this->U, x + 3 * lato, y + 1 * lato);
+    drawFaccia(window, this->U, x + 1 * lato, y + 1 * lato);
     drawFaccia(window, this->B, x + 1 * lato, y + 0 * lato);
     drawFaccia(window, this->L, x + 0 * lato, y + 1 * lato);
-    drawFaccia(window, this->D, x + 1 * lato, y + 1 * lato);
+    drawFaccia(window, this->D, x + 3 * lato, y + 1 * lato);
 }
 void Cubo::draw3D(sf::RenderWindow &window)
 {
