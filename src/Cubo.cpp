@@ -265,8 +265,8 @@ void Cubo::draw_3D_BLD(sf::RenderWindow &window, float x, float y, float size)
     drawTessera3D(window, x, y, BACK, B[0][0], size);
     drawTessera3D(window, x, y - size, BACK, B[0][1], size);
     drawTessera3D(window, x, y - size * 2, BACK, B[0][2], size);
-    drawTessera3D(window, x - altezza, y - size / 2, BACK, B[1][0], size);
-    drawTessera3D(window, x - altezza, y + size / 2, BACK, B[1][1], size);
+    drawTessera3D(window, x - altezza, y + size / 2, BACK, B[1][0], size);
+    drawTessera3D(window, x - altezza, y - size / 2, BACK, B[1][1], size);
     drawTessera3D(window, x - altezza, y - size * 3 / 2, BACK, B[1][2], size);
     drawTessera3D(window, x - altezza * 2, y + size, BACK, B[2][0], size);
     drawTessera3D(window, x - altezza * 2, y, BACK, B[2][1], size);
