@@ -22,11 +22,11 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(S)CuboMatricale.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
+OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(O)CuboMatricale.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
 
 #usare \ per file multiple
 
-all: app
+all: $(O)app
 #lancia l'app in automatico
 	./$<
 
@@ -58,9 +58,9 @@ $(O)main.o: $(U)main.cpp $(V)Gioco.hpp
 	$(COMPILE) $(U)main.cpp -o $(O)main.o
 
 #link all into an executable
-app: $(OBJ)
+$(O)app: $(OBJ)
 #	linkiamo tutti gli object e la grafica SFML
-	$(LINK) $(OBJ) -o app $(LINK_SFML)
+	$(LINK) $(OBJ) -o $(O)app $(LINK_SFML)
 
 #clean target
 .PHONY: clean
