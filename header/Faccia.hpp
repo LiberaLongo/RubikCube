@@ -25,15 +25,15 @@ private:
     /* [NW][N ][NE]
     *  [w ][ C][E ]
     *  [SW][S ][SE] */
-    ColoreRGB tesseraCentrale; //il colore si prende da qui in caso di reset
-    ColoreRGB tesseraNord;     //su ^
-    ColoreRGB tesseraEst;      //destra -->
-    ColoreRGB tesseraSud;      //giù v
-    ColoreRGB tesseraWest;     //sinistra <--, ovest, orange, arancio
-    ColoreRGB tesseraNE;       //nord est
-    ColoreRGB tesseraNW;       //nord ovest
-    ColoreRGB tesseraSE;       //sud est
-    ColoreRGB tesseraSW;       //sud ovest
+    ColoreRGB colore; //colore fisso della tessera centrale
+    ColoreRGB t_Nord;     //su ^
+    ColoreRGB t_Est;      //destra -->
+    ColoreRGB t_Sud;      //giù v
+    ColoreRGB t_West;     //sinistra <--, ovest, orange, arancio
+    ColoreRGB t_NE;       //nord est
+    ColoreRGB t_NW;       //nord ovest
+    ColoreRGB t_SE;       //sud est
+    ColoreRGB t_SW;       //sud ovest
 
 private:
     void ruotaOrario(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);

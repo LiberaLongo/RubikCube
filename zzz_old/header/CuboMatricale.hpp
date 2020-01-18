@@ -1,9 +1,9 @@
-#ifndef CUBO_HPP
-#define CUBO_HPP
+#ifndef CUBO_MATRICALE_HPP
+#define CUBO_MATRICALE_HPP
 
-#include "../header/DisegnabileI.hpp"
-#include "../header/Punto.hpp"
-#include "../header/ColoreRGB.hpp"
+#include "./DisegnabileI.hpp"
+#include "./Punto.hpp"
+#include "./ColoreRGB.hpp"
 
 #define DIM 3 //cubo di Rubik 3x3
 
