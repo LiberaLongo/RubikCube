@@ -21,7 +21,7 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(O)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
+OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(S)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
 
 #usare \ per file multiple
 
@@ -44,8 +44,8 @@ $(O)Button.o: $(U)Button.cpp $(H)Button.hpp
 $(O)Faccia.o: $(S)Faccia.cpp $(H)Faccia.hpp
 	$(COMPILE) $(S)Faccia.cpp -o $(O)Faccia.o
 
-$(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp
-	$(COMPILE) $(S)Cubo.cpp -o $(O)Cubo.o
+$(S)Cubo.o: $(S)Cubo.cpp $(S)Cubo.hpp
+	$(COMPILE) $(S)Cubo.cpp -o $(S)Cubo.o
 
 $(O)visualeMenu.o: $(U)visualeMenu.cpp $(H)visualeMenu.hpp
 	$(COMPILE) $(U)visualeMenu.cpp -o $(O)visualeMenu.o
@@ -68,4 +68,4 @@ app: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -rf $(O)*.o app
+	rm -rf $(O)*.o $(S)*.o app

@@ -13,6 +13,7 @@ H = ./header/
 S = ./src/
 U = ./utils/
 O = ./output/
+N = ./new/
 
 #comando per compilare
 CC = g++
@@ -41,11 +42,11 @@ $(O)ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 $(O)Button.o: $(U)Button.cpp $(H)Button.hpp
 	$(COMPILE) $(U)Button.cpp -o $(O)Button.o
 
-$(O)Faccia.o: $(S)Faccia.cpp $(H)Faccia.hpp
-	$(COMPILE) $(S)Faccia.cpp -o $(O)Faccia.o
+$(O)Faccia.o: $(N)Faccia.cpp $(H)Faccia.hpp
+	$(COMPILE) $(N)Faccia.cpp -o $(O)Faccia.o
 
-$(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp
-	$(COMPILE) $(S)Cubo.cpp -o $(O)Cubo.o
+$(O)Cubo.o: $(N)Cubo.cpp $(H)Cubo.hpp
+	$(COMPILE) $(N)Cubo.cpp -o $(O)Cubo.o
 
 $(O)visualeMenu.o: $(U)visualeMenu.cpp $(H)visualeMenu.hpp
 	$(COMPILE) $(U)visualeMenu.cpp -o $(O)visualeMenu.o
@@ -68,4 +69,4 @@ app: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -rf $(O)*.o app
+	rm -rf $(O)*.o app $(S)*.o
