@@ -1,4 +1,4 @@
-#include "../header/Cubo.hpp"
+#include "./Cubo.hpp"
 
 //PRIVATE
 //funzioni ausiliarie

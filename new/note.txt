@@ -1,0 +1,7 @@
+// F = Faccia Verde   , U, R, D, L);
+// R = Faccia Rosso   , U, B, D, F);
+// U = Faccia Viola   , B, R, F, L);
+// B = Faccia Blu     , U, L, D, R);
+// L = Faccia Arancio , U, F, D, B);
+// D = Faccia Giallo  , F, R, B, L);
+

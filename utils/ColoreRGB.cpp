@@ -1,5 +1,16 @@
 #include "../header/ColoreRGB.hpp"
 
+//static member data
+//colori di gioco
+//primari
+const ColoreRGB ColoreRGB::Rosso = ColoreRGB(LUMUS_MAXIMA, 0, 0);
+const ColoreRGB ColoreRGB::Giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+const ColoreRGB ColoreRGB::Blu   = ColoreRGB(0, 0, LUMUS_MAXIMA);
+//secondari
+const ColoreRGB ColoreRGB::Arancio = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA/2, 0);
+const ColoreRGB ColoreRGB::Verde = ColoreRGB(0, LUMUS_MAXIMA, 0);
+const ColoreRGB ColoreRGB::Viola   = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
+
 //costruttore vuoto
 ColoreRGB::ColoreRGB(void)
 {

@@ -15,6 +15,16 @@ private:
     int blue = LUMUS_MAXIMA;
 
 public:
+    //static member data
+    static const ColoreRGB Rosso;
+    static const ColoreRGB Giallo;
+    static const ColoreRGB Blu;
+    //secondari
+    static const ColoreRGB Arancio;
+    static const ColoreRGB Verde;
+    static const ColoreRGB Viola;
+
+public:
     //costruttore vuoto
     ColoreRGB(void);
     //costruttore completo

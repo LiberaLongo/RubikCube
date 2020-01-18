@@ -43,11 +43,16 @@ spostati con il comando `cd` sulla cartella in cui vuoi clonare il progetto
 con il terminale aperto
 
 spostati sulla cartella del progetto
-`cd nonGravitar`
+`cd RubikCube`
 
 compilare
-`make`
+`make -f old_cube_makefile`
 (per pulire: `make clean`, ma non è necessario per ricompilare)
+
+NB: Il primo tentativo di strutturare i dati è stato con le matrici
+    per eseguire il nuovo codice (non ancora funzionante)
+    `make`
+    ci sto ancora lavorando!
 
 eventualmente rilanciare il gioco (rieseguendo il programma)
 `./app`
@@ -64,3 +69,5 @@ in utils.hpp (riga 16)
 togliendo le //
 quindi risulta:
 "#define NON_FUNZIONA_FILL_COLOR"
+
+#

@@ -1,10 +1,9 @@
 #ifndef CUBO_HPP
 #define CUBO_HPP
 
-#include "./DisegnabileI.hpp"
-#include "./Punto.hpp"
-#include "./ColoreRGB.hpp"
-#include "./Faccia.hpp"
+#include "../header/DisegnabileI.hpp"
+#include "../header/Punto.hpp"
+#include "../header/ColoreRGB.hpp"
 
 #define DIM 3 //cubo di Rubik 3x3
 
@@ -25,15 +24,27 @@ class Cubo : public DisegnabileI
 {
     private:
         //facce
-        Faccia F = Faccia(ColoreRGB::Verde   , 'F', U, R, D, L);
-        Faccia R = Faccia(ColoreRGB::Rosso   , 'R', U, B, D, F);
-        Faccia U = Faccia(ColoreRGB::Viola   , 'U', B, R, F, L);
-        Faccia B = Faccia(ColoreRGB::Blu     , 'B', U, L, D, R);
-        Faccia L = Faccia(ColoreRGB::Arancio , 'L', U, F, D, B);
-        Faccia D = Faccia(ColoreRGB::Giallo  , 'D', F, R, B, L);
+        ColoreRGB F[DIM][DIM];
+        ColoreRGB R[DIM][DIM];
+        ColoreRGB U[DIM][DIM];
+        ColoreRGB B[DIM][DIM];
+        ColoreRGB L[DIM][DIM];
+        ColoreRGB D[DIM][DIM];
     private:
         //funzioni ausiliarie
+        //che crea una faccia di un colore
+        void creaFaccia(ColoreRGB faccia[DIM][DIM], ColoreRGB colore);
+        //che ruotano 4 colori tra loro
+        /*[t][x]
+          [z][y]
+        */
+        void ruotaOrario(ColoreRGB& t, ColoreRGB& x, ColoreRGB& y, ColoreRGB& z);
+        void ruota_anti(ColoreRGB& t, ColoreRGB& x, ColoreRGB& y, ColoreRGB& z);
+        //che ruota una intera faccia (senza modificare le facce vicine)
+        void facciaOrario(ColoreRGB faccia[DIM][DIM]);
+        void faccia_anti(ColoreRGB faccia[DIM][DIM]);
         //disegna
+        void drawFaccia(sf::RenderWindow &window, ColoreRGB faccia[DIM][DIM], float x, float y, float size);
         void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, float lato);
     
     public:
