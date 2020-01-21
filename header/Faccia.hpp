@@ -9,6 +9,10 @@
 
 extern float WIDTH, HEIGHT;
 
+void ruotaOrario(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);
+void ruota_anti(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);
+void drawTessera2D(sf::RenderWindow &window, ColoreRGB colore, float x, float y, float size);
+
 class Faccia : public DisegnabileI
 {
 private:
@@ -22,22 +26,12 @@ private:
     Faccia *faceEst = nullptr;
     Faccia *faceOvest = nullptr;
     //colori delle tessere
-    /* [NW][N ][NE]
-    *  [w ][ C][E ]
-    *  [SW][S ][SE] */
+    /* [NW][N ][NE]     [00][01][02]
+    *  [w ][ C][E ] --> [10][11][12]
+    *  [SW][S ][SE]     [20][21][22]*/
     ColoreRGB colore; //colore fisso della tessera centrale
-    ColoreRGB t_Nord;     //su ^
-    ColoreRGB t_Est;      //destra -->
-    ColoreRGB t_Sud;      //giù v
-    ColoreRGB t_West;     //sinistra <--, ovest, orange, arancio
-    ColoreRGB t_NE;       //nord est
-    ColoreRGB t_NW;       //nord ovest
-    ColoreRGB t_SE;       //sud est
-    ColoreRGB t_SW;       //sud ovest
-
-private:
-    void ruotaOrario(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);
-    void ruota_anti(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);
+    ColoreRGB tessere[DIM][DIM];
+    //potrebbe essere una matrice? certo ma chi ci capirebbe qualcosa poi?
 
 public:
     //costruttore
@@ -52,10 +46,10 @@ public:
     void move_anti(void);
 
     //disegna 2D con il Nord rivolto verso... NSWO
-    void drawN(sf::RenderWindow &window, float x, float y, float lato);
-    void drawS(sf::RenderWindow &window, float x, float y, float lato);
-    void drawW(sf::RenderWindow &window, float x, float y, float lato);
-    void drawO(sf::RenderWindow &window, float x, float y, float lato);
+    void drawN(sf::RenderWindow &window, float x, float y, float size);
+    void drawS(sf::RenderWindow &window, float x, float y, float size);
+    void drawW(sf::RenderWindow &window, float x, float y, float size);
+    void drawO(sf::RenderWindow &window, float x, float y, float size);
 
     //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
     ColoreRGB getCentro(void);

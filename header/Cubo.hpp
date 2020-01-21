@@ -6,8 +6,6 @@
 #include "./ColoreRGB.hpp"
 #include "./Faccia.hpp"
 
-#define DIM 3 //cubo di Rubik 3x3
-
 //angoli di rotazione per avere le tessere della faccia giusta
 #define FRONT   240
 #define RIGHT   120
@@ -21,20 +19,13 @@
 
 extern float WIDTH, HEIGHT;
 
+void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, float lato);
+
 class Cubo : public DisegnabileI
 {
     private:
         //facce
-        Faccia F = Faccia(ColoreRGB::Verde   , 'F', U, R, D, L);
-        Faccia R = Faccia(ColoreRGB::Rosso   , 'R', U, B, D, F);
-        Faccia U = Faccia(ColoreRGB::Viola   , 'U', B, R, F, L);
-        Faccia B = Faccia(ColoreRGB::Blu     , 'B', U, L, D, R);
-        Faccia L = Faccia(ColoreRGB::Arancio , 'L', U, F, D, B);
-        Faccia D = Faccia(ColoreRGB::Giallo  , 'D', F, R, B, L);
-    private:
-        //funzioni ausiliarie
-        //disegna
-        void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, float lato);
+        Faccia F, R, U, L, B, D;
     
     public:
         Cubo(void);

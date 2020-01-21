@@ -21,14 +21,15 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o $(O)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o $(O)Gioco.o $(O)main.o
-
-#usare \ per file multiple
+OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o \
+	$(O)Faccia.o $(O)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o \
+	$(O)Gioco.o $(O)main.o
 
 all: app
 #lancia l'app in automatico
 	./$<
 
+#cose per gestire oggetti di base
 $(O)utils.o: $(U)utils.cpp $(H)utils.hpp
 	$(COMPILE) $(U)utils.cpp -o $(O)utils.o
 
@@ -41,6 +42,7 @@ $(O)ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 $(O)Button.o: $(U)Button.cpp $(H)Button.hpp
 	$(COMPILE) $(U)Button.cpp -o $(O)Button.o
 
+# cose per gestire visuali
 $(O)Faccia.o: $(S)Faccia.cpp $(H)Faccia.hpp
 	$(COMPILE) $(S)Faccia.cpp -o $(O)Faccia.o
 
