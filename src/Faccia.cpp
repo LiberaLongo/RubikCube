@@ -30,22 +30,25 @@ void drawTessera2D(sf::RenderWindow &window, ColoreRGB colore, float x, float y,
     window.draw(tessera);
 }
 
+void ruotaLatoOrario(ColoreRGB *nord[DIM], ColoreRGB *est[DIM], ColoreRGB *sud[DIM], ColoreRGB *ovest[DIM])
+{
+    for (int i = 0; i < DIM; i++)
+        ruotaOrario(*nord[i], *est[i], *sud[i], *ovest[i]);
+}
+void ruotaLatoAntiorario(ColoreRGB *nord[DIM], ColoreRGB *est[DIM], ColoreRGB *sud[DIM], ColoreRGB *ovest[DIM])
+{
+    for (int i = 0; i < DIM; i++)
+        ruota_anti(*nord[i], *est[i], *sud[i], *ovest[i]);
+}
+
+//PUBLIC
 //costruttore
 Faccia::Faccia(void)
 {
     //costruttore vuoto
 }
-Faccia::Faccia(ColoreRGB colore, char name, Faccia &nord, Faccia &est, Faccia &sud, Faccia &ovest)
+Faccia::Faccia(ColoreRGB colore)
 {
-    if (name == 'F' || name == 'R' || name == 'U' || name == 'B' || name == 'L' || name == 'D')
-        this->name = name;
-    else
-        cout << "Errore nel nome della faccia " << name << endl;
-    //puntatori alle altre facce
-    this->faceNord = &nord;
-    this->faceSud = &est;
-    this->faceEst = &sud;
-    this->faceOvest = &ovest;
     //coloro la tessera centrale
     this->colore = colore;
     //coloro le tessere
@@ -64,14 +67,13 @@ void Faccia::Reset(void)
         for (int j = 0; j < DIM; j++) //colonna j
             tessere[i][j] = this->colore;
 }
-//muovi lei e le vicine
+//muovi lei ma non le vicine
 void Faccia::move(void)
 {
     //ruota in senso orario i miei vertici (Nord, Est, Sud, Ovest)
     ruotaOrario(tessere[0][1], tessere[1][2], tessere[2][1], tessere[1][0]);
     //ruota in senso orario i miei spigoli(NW, NE, SE, SW)
     ruotaOrario(tessere[0][0], tessere[0][2], tessere[2][2], tessere[2][0]);
-    //ruota in senso orario i vertici e gli spigoli delle facce adiacenti
 }
 void Faccia::move_anti(void)
 {
@@ -79,7 +81,6 @@ void Faccia::move_anti(void)
     ruota_anti(tessere[0][1], tessere[1][2], tessere[2][1], tessere[1][0]);
     //ruota in senso antiorario i miei spigoli
     ruota_anti(tessere[0][0], tessere[0][2], tessere[2][2], tessere[2][0]);
-    //ruota in senso antiorario i vertici e gli spigoli delle facce adiacenti
 }
 
 //disegna 2D con il Nord rivolto verso... NSWO
@@ -104,75 +105,65 @@ void Faccia::drawO(sf::RenderWindow &window, float x, float y, float size)
 }
 
 //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
-ColoreRGB Faccia::getCentro(void)
+ColoreRGB *Faccia::getCentro(void)
 {
-    return this->colore;
+    return &this->colore;
 }
-ColoreRGB Faccia::getNord(void)
+ColoreRGB *Faccia::getNord(void)
 {
-    return this->tessere[0][1];
+    return &this->tessere[0][1];
 }
-ColoreRGB Faccia::getEst(void)
+ColoreRGB *Faccia::getEst(void)
 {
-    return this->tessere[1][2];
+    return &this->tessere[1][2];
 }
-ColoreRGB Faccia::getSud(void)
+ColoreRGB *Faccia::getSud(void)
 {
-    return this->tessere[2][1];
+    return &this->tessere[2][1];
 }
-ColoreRGB Faccia::getOvest(void)
+ColoreRGB *Faccia::getOvest(void)
 {
-    return this->tessere[1][0];
+    return &this->tessere[1][0];
 }
-ColoreRGB Faccia::getNE(void)
+ColoreRGB *Faccia::getNE(void)
 {
-    return this->tessere[0][2];
+    return &this->tessere[0][2];
 }
-ColoreRGB Faccia::getNW(void)
+ColoreRGB *Faccia::getNW(void)
 {
-    return this->tessere[0][0];
+    return &this->tessere[0][0];
 }
-ColoreRGB Faccia::getSE(void)
+ColoreRGB *Faccia::getSE(void)
 {
-    return this->tessere[2][2];
+    return &this->tessere[2][2];
 }
-ColoreRGB Faccia::getSW(void)
+ColoreRGB *Faccia::getSW(void)
 {
-    return this->tessere[2][0];
+    return &this->tessere[2][0];
 }
 
-//PROTECTED?
-//vorrei che solo altre facce potessero modificarmi facendo la move
-//possibile?
-void Faccia::setNord(ColoreRGB colore)
+//metto nel vettore i puntatori a tre faccie sullo stesso lato
+void Faccia::getLatoNord(ColoreRGB *lato[DIM])
 {
-    this->tessere[0][1] = colore;
+    lato[0] = this->getNW();
+    lato[1] = this->getNord();
+    lato[2] = this->getNE();
 }
-void Faccia::setEst(ColoreRGB colore)
+void Faccia::getLatoEst(ColoreRGB *lato[DIM])
 {
-    this->tessere[1][2] = colore;
+    lato[0] = this->getNE();
+    lato[1] = this->getEst();
+    lato[2] = this->getSE();
 }
-void Faccia::setSud(ColoreRGB colore)
+void Faccia::getLatoSud(ColoreRGB *lato[DIM])
 {
-    this->tessere[2][1] = colore;
+    lato[0] = this->getSE();
+    lato[1] = this->getSud();
+    lato[2] = this->getSW();
 }
-void Faccia::setOvest(ColoreRGB colore)
+void Faccia::getLatoOvest(ColoreRGB *lato[DIM])
 {
-    this->tessere[1][0] = colore;
-}
-void Faccia::setNE(ColoreRGB colore)
-{
-    this->tessere[0][2] = colore;
-}
-void Faccia::setNW(ColoreRGB colore)
-{
-    this->tessere[0][0] = colore;
-}
-void Faccia::setSE(ColoreRGB colore)
-{
-    this->tessere[2][2] = colore;
-}
-void Faccia::setSW(ColoreRGB colore)
-{
-    this->tessere[2][0] = colore;
+    lato[0] = this->getSW();
+    lato[1] = this->getOvest();
+    lato[2] = this->getNW();
 }

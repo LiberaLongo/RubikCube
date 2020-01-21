@@ -18,6 +18,10 @@ using namespace std;
 //per i colori
 #define LUMUS_MAXIMA 255 //LUMUS_MAXIMA, citazione Harry Potter, (luminosità RGB)
 
+//sensi di rotazione
+#define ORARIO 0
+#define ANTIORARIO 1
+
 //macro per gestire opportunamente le visuali
 #define EXIT -1
 enum visuale

@@ -12,19 +12,13 @@ extern float WIDTH, HEIGHT;
 void ruotaOrario(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);
 void ruota_anti(ColoreRGB &n, ColoreRGB &e, ColoreRGB &s, ColoreRGB &w);
 void drawTessera2D(sf::RenderWindow &window, ColoreRGB colore, float x, float y, float size);
+void ruotaLatoOrario(ColoreRGB* nord[DIM], ColoreRGB* est[DIM], ColoreRGB* sud[DIM], ColoreRGB* ovest[DIM]);
+void ruotaLatoAntiorario(ColoreRGB* nord[DIM], ColoreRGB* est[DIM], ColoreRGB* sud[DIM], ColoreRGB* ovest[DIM]);
+
 
 class Faccia : public DisegnabileI
 {
 private:
-    //il nome ha importanza perchè se è FRLB so che se vado a ovest e poi a est
-    //o viceversa torno sulla stessa faccia, ma se invece è U o D no!
-    //e move deve sapere come orientarsi in mezzo alle facce del cubo
-    char name;
-    //puntatori alle altre facce
-    Faccia *faceNord = nullptr;
-    Faccia *faceSud = nullptr;
-    Faccia *faceEst = nullptr;
-    Faccia *faceOvest = nullptr;
     //colori delle tessere
     /* [NW][N ][NE]     [00][01][02]
     *  [w ][ C][E ] --> [10][11][12]
@@ -36,12 +30,12 @@ private:
 public:
     //costruttore
     Faccia(void);
-    Faccia(ColoreRGB colore, char name, Faccia &nord, Faccia &est, Faccia &sud, Faccia &ovest);
+    Faccia(ColoreRGB colore);
     virtual ~Faccia(void){};
 
     //resetta la faccia del suo colore
     void Reset(void);
-    //muovi lei e le vicine
+    //muovi lei ma non le vicine
     void move(void);
     void move_anti(void);
 
@@ -52,26 +46,20 @@ public:
     void drawO(sf::RenderWindow &window, float x, float y, float size);
 
     //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
-    ColoreRGB getCentro(void);
-    ColoreRGB getNord(void);
-    ColoreRGB getEst(void);
-    ColoreRGB getSud(void);
-    ColoreRGB getOvest(void);
-    ColoreRGB getNE(void);
-    ColoreRGB getNW(void);
-    ColoreRGB getSE(void);
-    ColoreRGB getSW(void);
+    ColoreRGB* getCentro(void);
+    ColoreRGB* getNord(void);
+    ColoreRGB* getEst(void);
+    ColoreRGB* getSud(void);
+    ColoreRGB* getOvest(void);
+    ColoreRGB* getNE(void);
+    ColoreRGB* getNW(void);
+    ColoreRGB* getSE(void);
+    ColoreRGB* getSW(void);
 
-public:
-    //vorrei che solo altre facce potessero modificarmi facendo la move
-    //possibile?
-    void setNord(ColoreRGB colore);
-    void setEst(ColoreRGB colore);
-    void setSud(ColoreRGB colore);
-    void setOvest(ColoreRGB colore);
-    void setNE(ColoreRGB colore);
-    void setNW(ColoreRGB colore);
-    void setSE(ColoreRGB colore);
-    void setSW(ColoreRGB colore);
+    //metto nel vettore i puntatori a tre faccie sullo stesso lato
+    void getLatoNord(ColoreRGB* lato[DIM]);
+    void getLatoEst(ColoreRGB* lato[DIM]);
+    void getLatoSud(ColoreRGB* lato[DIM]);
+    void getLatoOvest(ColoreRGB* lato[DIM]);
 };
 #endif //FACCIA_HPP

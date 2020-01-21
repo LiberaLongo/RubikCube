@@ -25,12 +25,12 @@ class Cubo : public DisegnabileI
 {
     private:
         //facce
-        Faccia F = Faccia(ColoreRGB::Verde, 'F', U, R, D, L);
-        Faccia R = Faccia(ColoreRGB::Rosso, 'R', U, B, D, F);
-        Faccia U = Faccia(ColoreRGB::Viola, 'U', B, R, F, L);
-        Faccia B = Faccia(ColoreRGB::Blu, 'B', U, L, D, R);
-        Faccia L = Faccia(ColoreRGB::Arancio, 'L', U, F, D, B);
-        Faccia D = Faccia(ColoreRGB::Giallo, 'D', F, R, B, L);
+        Faccia F = Faccia(ColoreRGB::Verde);
+        Faccia R = Faccia(ColoreRGB::Rosso);
+        Faccia U = Faccia(ColoreRGB::Viola);
+        Faccia B = Faccia(ColoreRGB::Blu);
+        Faccia L = Faccia(ColoreRGB::Arancio);
+        Faccia D = Faccia(ColoreRGB::Giallo);
     
     public:
         Cubo(void);
@@ -38,19 +38,12 @@ class Cubo : public DisegnabileI
         //resetta
         void Reset(void);
         //ruota in senso Orario
-        void Front(void);
-        void Right(void);
-        void Up(void);
-        void Back(void);
-        void Left(void);
-        void Down(void);
-        //ruota in senso antiorario
-        void Front_anti(void);
-        void Right_anti(void);
-        void Up_anti(void);
-        void Back_anti(void);
-        void Left_anti(void);
-        void Down_anti(void);
+        void Front(int senso);
+        void Right(int senso);
+        void Up(int senso);
+        void Back(int senso);
+        void Left(int senso);
+        void Down(int senso);
         //disegna le varie visuali
         void draw2D(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);

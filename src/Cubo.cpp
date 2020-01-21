@@ -43,55 +43,133 @@ void Cubo::Reset(void)
     this->D.Reset();
 }
 //ruota in senso Orario
-void Cubo::Front(void)
+void Cubo::Front(int senso)
 {
-    this->F.move();
+    ColoreRGB *Up[DIM], *Right[DIM], *Down[DIM], *Left[DIM];
+    this->U.getLatoSud(Up);
+    this->R.getLatoOvest(Right);
+    this->D.getLatoNord(Down);
+    this->L.getLatoEst(Left);
+    switch (senso)
+    {
+    case ORARIO:
+        this->F.move();
+        ruotaLatoOrario(Up, Right, Down, Left);
+        break;
+    case ANTIORARIO:
+        this->F.move_anti();
+        ruotaLatoAntiorario(Up, Right, Down, Left);
+        break;
+    default:
+        break;
+    }
 }
-void Cubo::Right(void)
+void Cubo::Right(int senso)
 {
-    this->R.move();
+    ColoreRGB *Up[DIM], *Front[DIM], *Down[DIM], *Back[DIM];
+    this->U.getLatoEst(Up);
+    this->B.getLatoOvest(Back);
+    this->D.getLatoEst(Down);
+    this->F.getLatoEst(Front);
+    switch (senso)
+    {
+    case ORARIO:
+        this->R.move();
+        ruotaLatoOrario(Up, Back, Down, Front);
+        break;
+    case ANTIORARIO:
+        this->R.move_anti();
+        ruotaLatoAntiorario(Up, Back, Down, Front);
+        break;
+    default:
+        break;
+    }
 }
-void Cubo::Up(void)
+void Cubo::Up(int senso)
 {
-    this->U.move();
+    ColoreRGB *Back[DIM], *Right[DIM], *Front[DIM], *Left[DIM];
+    this->B.getLatoNord(Back);
+    this->R.getLatoNord(Right);
+    this->F.getLatoNord(Front);
+    this->L.getLatoNord(Left);
+    switch (senso)
+    {
+    case ORARIO:
+        this->U.move();
+        ruotaLatoOrario(Back, Right, Front, Left);
+        break;
+    case ANTIORARIO:
+        this->U.move_anti();
+        ruotaLatoAntiorario(Back, Right, Front, Left);
+        break;
+    default:
+        break;
+    }
 }
-void Cubo::Back(void)
+void Cubo::Back(int senso)
 {
-    this->B.move();
+    ColoreRGB *Up[DIM], *Left[DIM], *Down[DIM], *Right[DIM];
+    this->U.getLatoNord(Up);
+    this->L.getLatoOvest(Left);
+    this->D.getLatoSud(Down);
+    this->R.getLatoEst(Right);
+    switch (senso)
+    {
+    case ORARIO:
+        this->B.move();
+        ruotaLatoOrario(Up, Left, Down, Right);
+        break;
+    case ANTIORARIO:
+        this->B.move_anti();
+        ruotaLatoAntiorario(Up, Left, Down, Right);
+        break;
+    default:
+        break;
+    }
 }
-void Cubo::Left(void)
+void Cubo::Left(int senso)
 {
-    this->L.move();
+    ColoreRGB *Up[DIM], *Front[DIM], *Down[DIM], *Back[DIM];
+    this->U.getLatoOvest(Up);
+    this->F.getLatoOvest(Front);
+    this->D.getLatoOvest(Down);
+    this->B.getLatoEst(Back);
+    switch (senso)
+    {
+    case ORARIO:
+        this->L.move();
+        ruotaLatoOrario(Up, Front, Down, Back);
+        break;
+    case ANTIORARIO:
+        this->L.move_anti();
+        ruotaLatoAntiorario(Up, Front, Down, Back);
+        break;
+    default:
+        break;
+    }
 }
-void Cubo::Down(void)
+void Cubo::Down(int senso)
 {
-    this->D.move();
+    ColoreRGB *Back[DIM], *Right[DIM], *Front[DIM], *Left[DIM];
+    this->B.getLatoSud(Back);
+    this->R.getLatoSud(Right);
+    this->F.getLatoSud(Front);
+    this->L.getLatoSud(Left);
+    switch (senso)
+    {
+    case ORARIO:
+        this->D.move();
+        ruotaLatoOrario(Back, Right, Front, Left);
+        break;
+    case ANTIORARIO:
+        this->D.move_anti();
+        ruotaLatoAntiorario(Back, Right, Front, Left);
+        break;
+    default:
+        break;
+    }
 }
-//ruota in senso antiorarioS
-void Cubo::Front_anti(void)
-{
-    this->F.move_anti();
-}
-void Cubo::Right_anti(void)
-{
-    this->R.move_anti();
-}
-void Cubo::Up_anti(void)
-{
-    this->U.move_anti();
-}
-void Cubo::Back_anti(void)
-{
-    this->B.move_anti();
-}
-void Cubo::Left_anti(void)
-{
-    this->L.move_anti();
-}
-void Cubo::Down_anti(void)
-{
-    this->D.move_anti();
-}
+
 //disegna
 void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
 {
@@ -108,35 +186,35 @@ void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
 {
     float altezza = size * sqrt(3) / 2;
     //FRONT
-    drawTessera3D(window, x - altezza * 2, y - size, FRONT, F.getNW(), size);
-    drawTessera3D(window, x - altezza, y - size / 2, FRONT, F.getNord(), size);
-    drawTessera3D(window, x, y, FRONT, F.getNE(), size);
-    drawTessera3D(window, x - altezza * 2, y, FRONT, F.getOvest(), size);
-    drawTessera3D(window, x - altezza, y + size / 2, FRONT, F.getCentro(), size);
-    drawTessera3D(window, x, y + size, FRONT, F.getEst(), size);
-    drawTessera3D(window, x, y + size * 2, FRONT, F.getSE(), size);
-    drawTessera3D(window, x - altezza, y + size * 3 / 2, FRONT, F.getSud(), size);
-    drawTessera3D(window, x - altezza * 2, y + size, FRONT, F.getSW(), size);
+    drawTessera3D(window, x - altezza * 2, y - size, FRONT, *F.getNW(), size);
+    drawTessera3D(window, x - altezza, y - size / 2, FRONT, *F.getNord(), size);
+    drawTessera3D(window, x, y, FRONT, *F.getNE(), size);
+    drawTessera3D(window, x - altezza * 2, y, FRONT, *F.getOvest(), size);
+    drawTessera3D(window, x - altezza, y + size / 2, FRONT, *F.getCentro(), size);
+    drawTessera3D(window, x, y + size, FRONT, *F.getEst(), size);
+    drawTessera3D(window, x, y + size * 2, FRONT, *F.getSE(), size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, FRONT, *F.getSud(), size);
+    drawTessera3D(window, x - altezza * 2, y + size, FRONT, *F.getSW(), size);
     //RIGHT
-    drawTessera3D(window, x, y, RIGHT, R.getNW(), size);
-    drawTessera3D(window, x + altezza, y - size / 2, RIGHT, R.getNord(), size);
-    drawTessera3D(window, x + altezza * 2, y - size, RIGHT, R.getNE(), size);
-    drawTessera3D(window, x, y + size, RIGHT, R.getOvest(), size);
-    drawTessera3D(window, x + altezza, y + size / 2, RIGHT, R.getCentro(), size);
-    drawTessera3D(window, x + altezza * 2, y, RIGHT, R.getEst(), size);
-    drawTessera3D(window, x, y + size * 2, RIGHT, R.getSW(), size);
-    drawTessera3D(window, x + altezza, y + size * 3 / 2, RIGHT, R.getSud(), size);
-    drawTessera3D(window, x + altezza * 2, y + size, RIGHT, R.getSE(), size);
+    drawTessera3D(window, x, y, RIGHT, *R.getNW(), size);
+    drawTessera3D(window, x + altezza, y - size / 2, RIGHT, *R.getNord(), size);
+    drawTessera3D(window, x + altezza * 2, y - size, RIGHT, *R.getNE(), size);
+    drawTessera3D(window, x, y + size, RIGHT, *R.getOvest(), size);
+    drawTessera3D(window, x + altezza, y + size / 2, RIGHT, *R.getCentro(), size);
+    drawTessera3D(window, x + altezza * 2, y, RIGHT, *R.getEst(), size);
+    drawTessera3D(window, x, y + size * 2, RIGHT, *R.getSW(), size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, RIGHT, *R.getSud(), size);
+    drawTessera3D(window, x + altezza * 2, y + size, RIGHT, *R.getSE(), size);
     //UP
-    drawTessera3D(window, x, y - size * 2, UP, U.getNW(), size);
-    drawTessera3D(window, x + altezza, y - size * 3 / 2, UP, U.getNord(), size);
-    drawTessera3D(window, x + altezza * 2, y - size, UP, U.getNE(), size);
-    drawTessera3D(window, x - altezza, y - size * 3 / 2, UP, U.getOvest(), size);
-    drawTessera3D(window, x, y - size, UP, U.getCentro(), size);
-    drawTessera3D(window, x + altezza, y - size / 2, UP, U.getEst(), size);
-    drawTessera3D(window, x - altezza * 2, y - size, UP, U.getSW(), size);
-    drawTessera3D(window, x - altezza, y - size / 2, UP, U.getSud(), size);
-    drawTessera3D(window, x, y, UP, U.getSE(), size);
+    drawTessera3D(window, x, y - size * 2, UP, *U.getNW(), size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, UP, *U.getNord(), size);
+    drawTessera3D(window, x + altezza * 2, y - size, UP, *U.getNE(), size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, UP, *U.getOvest(), size);
+    drawTessera3D(window, x, y - size, UP, *U.getCentro(), size);
+    drawTessera3D(window, x + altezza, y - size / 2, UP, *U.getEst(), size);
+    drawTessera3D(window, x - altezza * 2, y - size, UP, *U.getSW(), size);
+    drawTessera3D(window, x - altezza, y - size / 2, UP, *U.getSud(), size);
+    drawTessera3D(window, x, y, UP, *U.getSE(), size);
 }
 
 void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size)

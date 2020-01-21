@@ -95,40 +95,40 @@ int visualeCubo::Run(sf::RenderWindow &App)
                 switch (mossa)
                 {
                 case 0:
-                    cubo.Front();
+                    cubo.Front(ORARIO);
                     break;
                 case 1:
-                    cubo.Right();
+                    cubo.Right(ORARIO);
                     break;
                 case 2:
-                    cubo.Up();
+                    cubo.Up(ORARIO);
                     break;
                 case 3:
-                    cubo.Back();
+                    cubo.Back(ORARIO);
                     break;
                 case 4:
-                    cubo.Left();
+                    cubo.Left(ORARIO);
                     break;
                 case 5:
-                    cubo.Down();
+                    cubo.Down(ORARIO);
                     break;                
                 case 6+0:
-                    cubo.Front_anti();
+                    cubo.Front(ANTIORARIO);
                     break;
                 case 6+1:
-                    cubo.Right_anti();
+                    cubo.Right(ANTIORARIO);
                     break;
                 case 6+2:
-                    cubo.Up_anti();
+                    cubo.Up(ANTIORARIO);
                     break;
                 case 6+3:
-                    cubo.Back_anti();
+                    cubo.Back(ANTIORARIO);
                     break;
                 case 6+4:
-                    cubo.Left_anti();
+                    cubo.Left(ANTIORARIO);
                     break;
                 case 6+5:
-                    cubo.Down_anti();
+                    cubo.Down(ANTIORARIO);
                     break;
                 default:
                     break;
