@@ -62,7 +62,7 @@ public:
     ColoreRGB getSE(void);
     ColoreRGB getSW(void);
 
-protected:
+public:
     //vorrei che solo altre facce potessero modificarmi facendo la move
     //possibile?
     void setNord(ColoreRGB colore);

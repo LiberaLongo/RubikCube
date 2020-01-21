@@ -62,7 +62,7 @@ void Faccia::Reset(void)
     //per ogni cella inserisci il colore
     for (int i = 0; i < DIM; i++)     //riga i
         for (int j = 0; j < DIM; j++) //colonna j
-            tessere[i][j] = colore;
+            tessere[i][j] = this->colore;
 }
 //muovi lei e le vicine
 void Faccia::move(void)
@@ -71,7 +71,7 @@ void Faccia::move(void)
     ruotaOrario(tessere[0][1], tessere[1][2], tessere[2][1], tessere[1][0]);
     //ruota in senso orario i miei spigoli(NW, NE, SE, SW)
     ruotaOrario(tessere[0][0], tessere[0][2], tessere[2][2], tessere[2][0]);
-    //ruota in senso orario i vertici e gli spigoli delle facce
+    //ruota in senso orario i vertici e gli spigoli delle facce adiacenti
 }
 void Faccia::move_anti(void)
 {
@@ -79,7 +79,7 @@ void Faccia::move_anti(void)
     ruota_anti(tessere[0][1], tessere[1][2], tessere[2][1], tessere[1][0]);
     //ruota in senso antiorario i miei spigoli
     ruota_anti(tessere[0][0], tessere[0][2], tessere[2][2], tessere[2][0]);
-    //ruota in senso antiorario i vertici e gli spigoli delle facce
+    //ruota in senso antiorario i vertici e gli spigoli delle facce adiacenti
 }
 
 //disegna 2D con il Nord rivolto verso... NSWO
@@ -88,9 +88,9 @@ void Faccia::drawN(sf::RenderWindow &window, float x, float y, float size)
     for (int i = 0; i < DIM; i++)
         for (int j = 0; j < DIM; j++)
         {
-            float xi = x + i * size;
-            float yj = y + j * size;
-            drawTessera2D(window, tessere[i][j], xi, yj, size);
+            float xj = x + j * size;
+            float yi = y + i * size;
+            drawTessera2D(window, tessere[i][j], xj, yi, size);
         }
 }
 void Faccia::drawS(sf::RenderWindow &window, float x, float y, float size)
