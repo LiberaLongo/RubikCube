@@ -38,10 +38,9 @@ Faccia::Faccia(void)
 Faccia::Faccia(ColoreRGB colore, char name, Faccia &nord, Faccia &est, Faccia &sud, Faccia &ovest)
 {
     if (name == 'F' || name == 'R' || name == 'U' || name == 'B' || name == 'L' || name == 'D')
-        cout << "Faccia " << name << " costruita\n";
+        this->name = name;
     else
         cout << "Errore nel nome della faccia " << name << endl;
-    this->name = name;
     //puntatori alle altre facce
     this->faceNord = &nord;
     this->faceSud = &est;

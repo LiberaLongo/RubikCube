@@ -22,19 +22,19 @@ int visualeCubo::Run(sf::RenderWindow &App)
     float sizeB = min(WIDTH / 4, HEIGHT / 3) / 4;
     float x_anti = WIDTH *3/4, y_anti = 0.f;
     //bottoni senso orario
-    Button buttonFront = Button(x_or + 1 * sizeB, y_or + 2 * sizeB, "F", sizeB);
+    Button buttonFront = Button(x_or + 1 * sizeB, y_or + 1 * sizeB, "F", sizeB);
     Button buttonRight = Button(x_or + 2 * sizeB, y_or + 1 * sizeB, "R", sizeB);
-    Button buttonUp = Button(x_or + 1 * sizeB, y_or + 1 * sizeB, "U", sizeB);
-    Button buttonBack = Button(x_or + 1 * sizeB, y_or + 0 * sizeB, "B", sizeB);
+    Button buttonUp = Button(x_or + 1 * sizeB, y_or + 0 * sizeB, "U", sizeB);
+    Button buttonBack = Button(x_or + 3 * sizeB, y_or + 1 * sizeB, "B", sizeB);
     Button buttonLeft = Button(x_or + 0 * sizeB, y_or + 1 * sizeB, "L", sizeB);
-    Button buttonDown = Button(x_or + 3 * sizeB, y_or + 1 * sizeB, "D", sizeB);
+    Button buttonDown = Button(x_or + 1 * sizeB, y_or + 2 * sizeB, "D", sizeB);
     //bottoni senso antiorario
-    Button buttonFront_anti = Button(x_anti + 1 * sizeB, y_anti + 2 * sizeB, "F'", sizeB);
+    Button buttonFront_anti = Button(x_anti + 1 * sizeB, y_anti + 1 * sizeB, "F'", sizeB);
     Button buttonRight_anti = Button(x_anti + 2 * sizeB, y_anti + 1 * sizeB, "R'", sizeB);
-    Button buttonUp_anti = Button(x_anti + 1 * sizeB, y_anti + 1 * sizeB, "U'", sizeB);
-    Button buttonBack_anti = Button(x_anti + 1 * sizeB, y_anti + 0 * sizeB, "B'", sizeB);
+    Button buttonUp_anti = Button(x_anti + 1 * sizeB, y_anti + 0 * sizeB, "U'", sizeB);
+    Button buttonBack_anti = Button(x_anti + 3 * sizeB, y_anti + 1 * sizeB, "B'", sizeB);
     Button buttonLeft_anti = Button(x_anti + 0 * sizeB, y_anti + 1 * sizeB, "L'", sizeB);
-    Button buttonDown_anti = Button(x_anti + 3 * sizeB, y_anti + 1 * sizeB, "D'", sizeB);    
+    Button buttonDown_anti = Button(x_anti + 1 * sizeB, y_anti + 2 * sizeB, "D'", sizeB);    
     //vettore di bottoni
     Button arrayButton[] = {buttonFront, buttonRight, buttonUp, buttonBack, buttonLeft, buttonDown,
         buttonFront_anti, buttonRight_anti, buttonUp_anti, buttonBack_anti, buttonLeft_anti, buttonDown_anti};

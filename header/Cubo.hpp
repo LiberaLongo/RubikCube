@@ -25,7 +25,12 @@ class Cubo : public DisegnabileI
 {
     private:
         //facce
-        Faccia F, R, U, L, B, D;
+        Faccia F = Faccia(ColoreRGB::Verde, 'F', U, R, D, L);
+        Faccia R = Faccia(ColoreRGB::Rosso, 'R', U, B, D, F);
+        Faccia U = Faccia(ColoreRGB::Viola, 'U', B, R, F, L);
+        Faccia B = Faccia(ColoreRGB::Blu, 'B', U, L, D, R);
+        Faccia L = Faccia(ColoreRGB::Arancio, 'L', U, F, D, B);
+        Faccia D = Faccia(ColoreRGB::Giallo, 'D', F, R, B, L);
     
     public:
         Cubo(void);
