@@ -25,15 +25,12 @@ class Cubo : public DisegnabileI
 {
     private:
         //facce
-        Faccia F = Faccia(ColoreRGB::Verde);
-        Faccia R = Faccia(ColoreRGB::Rosso);
-        Faccia U = Faccia(ColoreRGB::Viola);
-        Faccia B = Faccia(ColoreRGB::Blu);
-        Faccia L = Faccia(ColoreRGB::Arancio);
-        Faccia D = Faccia(ColoreRGB::Giallo);
+        Faccia F, R, U, B, L, D;
     
     public:
         Cubo(void);
+        Cubo(ColoreRGB front, ColoreRGB right, ColoreRGB up
+            , ColoreRGB back, ColoreRGB left, ColoreRGB down);
         virtual ~Cubo(void) {};
         //resetta
         void Reset(void);

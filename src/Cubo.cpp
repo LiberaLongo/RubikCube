@@ -32,8 +32,29 @@ void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, Col
 Cubo::Cubo(void)
 {
     //facce
+    this->F = Faccia(ColoreRGB::Verde);
+    this->R = Faccia(ColoreRGB::Rosso);
+    this->U = Faccia(ColoreRGB::Viola);
+    this->B = Faccia(ColoreRGB::Blu);
+    this->L = Faccia(ColoreRGB::Arancio);
+    this->D = Faccia(ColoreRGB::Giallo);
+    //facce
     this->Reset();
 }
+
+Cubo::Cubo(ColoreRGB front, ColoreRGB right, ColoreRGB up, ColoreRGB back, ColoreRGB left, ColoreRGB down)
+{
+    //facce
+    this->F = Faccia(front);
+    this->R = Faccia(right);
+    this->U = Faccia(up);
+    this->B = Faccia(back);
+    this->L = Faccia(left);
+    this->D = Faccia(down);
+    //facce
+    this->Reset();
+}
+
 //resetta
 void Cubo::Reset(void)
 {
