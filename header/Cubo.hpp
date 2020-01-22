@@ -19,7 +19,7 @@
 
 extern float WIDTH, HEIGHT;
 
-void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, float lato);
+void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, sf::Color bordo, float lato);
 
 class Cubo : public DisegnabileI
 {
