@@ -10,6 +10,7 @@ LINK_SFML = $(SYSTEM) $(WINDOW) $(GRAFICS) $(NETWORK) $(AUDIO)
 
 #cartelle progetto
 H = ./header/
+M = ./main/
 S = ./src/
 U = ./utils/
 O = ./output/
@@ -42,24 +43,25 @@ $(O)ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 $(O)Button.o: $(U)Button.cpp $(H)Button.hpp
 	$(COMPILE) $(U)Button.cpp -o $(O)Button.o
 
-# cose per gestire visuali
+#cose per gestire il cubo
 $(O)Faccia.o: $(S)Faccia.cpp $(H)Faccia.hpp
 	$(COMPILE) $(S)Faccia.cpp -o $(O)Faccia.o
 
 $(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp
 	$(COMPILE) $(S)Cubo.cpp -o $(O)Cubo.o
 
-$(O)visualeMenu.o: $(U)visualeMenu.cpp $(H)visualeMenu.hpp
-	$(COMPILE) $(U)visualeMenu.cpp -o $(O)visualeMenu.o
+# cose per gestire visuali
+$(O)visualeMenu.o: $(M)visualeMenu.cpp $(H)visualeMenu.hpp
+	$(COMPILE) $(M)visualeMenu.cpp -o $(O)visualeMenu.o
 
-$(O)visualeCubo.o: $(S)visualeCubo.cpp $(H)visualeCubo.hpp
-	$(COMPILE) $(S)visualeCubo.cpp -o $(O)visualeCubo.o
+$(O)visualeCubo.o: $(M)visualeCubo.cpp $(H)visualeCubo.hpp
+	$(COMPILE) $(M)visualeCubo.cpp -o $(O)visualeCubo.o
 
-$(O)Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
-	$(COMPILE) $(S)Gioco.cpp -o $(O)Gioco.o
+$(O)Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp
+	$(COMPILE) $(M)Gioco.cpp -o $(O)Gioco.o
 
-$(O)main.o: $(U)main.cpp $(H)Gioco.hpp
-	$(COMPILE) $(U)main.cpp -o $(O)main.o
+$(O)main.o: $(M)main.cpp $(H)Gioco.hpp
+	$(COMPILE) $(M)main.cpp -o $(O)main.o
 
 #link all into an executable
 app: $(OBJ)
@@ -70,4 +72,4 @@ app: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -rf $(O)*.o app $(S)*.o
+	rm -rf $(O)*.o app
