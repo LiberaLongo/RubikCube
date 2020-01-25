@@ -2,6 +2,8 @@
 
 float WIDTH = 800.f, HEIGHT = 600.f;
 
+Cubo cubo;
+
 void impostazioniGioco(void)
 {
 	cout << "\nINIZIA IL GIOCO!\n";

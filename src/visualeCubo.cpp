@@ -2,6 +2,8 @@
 
 extern float WIDTH, HEIGHT;
 
+extern Cubo cubo;
+
 //pubbliche
 visualeCubo::visualeCubo(void)
 {
@@ -9,7 +11,6 @@ visualeCubo::visualeCubo(void)
 
 int visualeCubo::Run(sf::RenderWindow &App)
 {
-    Cubo cubo = Cubo();
     //comincia la trattazione della finestra
     bool Running = true;
     sf::Event event;
