@@ -15,13 +15,20 @@ int visualeCubo::Run(sf::RenderWindow &App)
     bool Running = true;
     sf::Event event;
 
-    //bottone per reset
-    Button buttonReset = Button(WIDTH/2 - 100.f, HEIGHT*4/5+20.f, "Reset");
-    //bottoni per le mosse
+    //selettore della mossa
     int mossa = -1;
-    float x_or = WIDTH / 2, y_or = 0.f;
+
+    //coordinate per i bottoni
     float sizeB = min(WIDTH / 4, HEIGHT / 3) / 4;
-    float x_anti = WIDTH *3/4, y_anti = 0.f;
+    float x_or = sizeB * 13 / 2, y_or = 0.f;
+    float x_anti = x_or + sizeB * 4, y_anti = 0.f;
+    //dimensione lato del cubo
+    float lato = sizeB * 3;
+
+    //bottone per reset
+    Button buttonReset = Button(x_or + sizeB, y_or + sizeB * 19 / 2 + 20.f, "Reset", sizeB * 9 / 2, sizeB * 3 / 2);
+
+    //bottoni per le mosse
     //bottoni senso orario
     Button buttonFront = Button(x_or + 1 * sizeB, y_or + 1 * sizeB, "F", sizeB);
     Button buttonRight = Button(x_or + 2 * sizeB, y_or + 1 * sizeB, "R", sizeB);
@@ -35,11 +42,11 @@ int visualeCubo::Run(sf::RenderWindow &App)
     Button buttonUp_anti = Button(x_anti + 1 * sizeB, y_anti + 0 * sizeB, "U'", sizeB);
     Button buttonBack_anti = Button(x_anti + 3 * sizeB, y_anti + 1 * sizeB, "B'", sizeB);
     Button buttonLeft_anti = Button(x_anti + 0 * sizeB, y_anti + 1 * sizeB, "L'", sizeB);
-    Button buttonDown_anti = Button(x_anti + 1 * sizeB, y_anti + 2 * sizeB, "D'", sizeB);    
+    Button buttonDown_anti = Button(x_anti + 1 * sizeB, y_anti + 2 * sizeB, "D'", sizeB);
     //vettore di bottoni
     Button arrayButton[] = {buttonFront, buttonRight, buttonUp, buttonBack, buttonLeft, buttonDown,
-        buttonFront_anti, buttonRight_anti, buttonUp_anti, buttonBack_anti, buttonLeft_anti, buttonDown_anti};
-    int array_dim = sizeof(arrayButton)/sizeof(arrayButton[0]);
+                            buttonFront_anti, buttonRight_anti, buttonUp_anti, buttonBack_anti, buttonLeft_anti, buttonDown_anti};
+    int array_dim = sizeof(arrayButton) / sizeof(arrayButton[0]);
     //un punto adibito a mouse click
     Punto mouseClick;
     bool haCliccato;
@@ -61,22 +68,23 @@ int visualeCubo::Run(sf::RenderWindow &App)
             //mouse
             case sf::Event::MouseButtonPressed:
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
-                if(buttonReset.checkMouse(mouseClick)) {
+                if (buttonReset.checkMouse(mouseClick))
+                {
                     cubo.Reset();
                     haCliccato = true;
                     mossa = -1;
                 }
                 else
-                //controlla quale bottone è stato premuto
-                for (int i = 0; i < array_dim; i++)
-                {
-                    if (arrayButton[i].checkMouse(mouseClick))
+                    //controlla quale bottone è stato premuto
+                    for (int i = 0; i < array_dim; i++)
                     {
-                        haCliccato = true;
-                        mossa = i;
-                        break; //esci dal ciclo for
+                        if (arrayButton[i].checkMouse(mouseClick))
+                        {
+                            haCliccato = true;
+                            mossa = i;
+                            break; //esci dal ciclo for
+                        }
                     }
-                }
             //tastiera
             case sf::Event::KeyPressed:
                 switch (event.key.code)
@@ -112,23 +120,23 @@ int visualeCubo::Run(sf::RenderWindow &App)
                     break;
                 case 5:
                     cubo.Down(ORARIO);
-                    break;                
-                case 6+0:
+                    break;
+                case 6 + 0:
                     cubo.Front(ANTIORARIO);
                     break;
-                case 6+1:
+                case 6 + 1:
                     cubo.Right(ANTIORARIO);
                     break;
-                case 6+2:
+                case 6 + 2:
                     cubo.Up(ANTIORARIO);
                     break;
-                case 6+3:
+                case 6 + 3:
                     cubo.Back(ANTIORARIO);
                     break;
-                case 6+4:
+                case 6 + 4:
                     cubo.Left(ANTIORARIO);
                     break;
-                case 6+5:
+                case 6 + 5:
                     cubo.Down(ANTIORARIO);
                     break;
                 default:
@@ -136,17 +144,17 @@ int visualeCubo::Run(sf::RenderWindow &App)
                 }
             }
         }
-        
+
         for (int i = 0; i < array_dim; i++)
         {
             arrayButton[i].setChecked(false);
         }
         buttonReset.setChecked(false);
-        if(mossa != -1)
+        if (mossa != -1)
             arrayButton[mossa].setChecked(true);
         else
             buttonReset.setChecked(true);
-        
+
         //pulisci la finestra colorandola di nero
         App.clear(sf::Color::Black);
         //disegna qui...
@@ -155,7 +163,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
             arrayButton[i].draw(App);
         }
         buttonReset.draw(App);
-        cubo.draw(App, 0.f, 0.f, HEIGHT/4);
+        cubo.draw(App, 0.f, 0.f, lato, 10.f);
         //fine del frame corrente
         App.display();
     }

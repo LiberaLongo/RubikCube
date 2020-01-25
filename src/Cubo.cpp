@@ -173,7 +173,7 @@ void Cubo::Left(int senso)
 }
 void Cubo::Down(int senso)
 {
-    ColoreRGB  *Front[DIM], *Right[DIM], *Back[DIM], *Left[DIM];
+    ColoreRGB *Front[DIM], *Right[DIM], *Back[DIM], *Left[DIM];
     this->F.getLatoSud(Front);
     this->R.getLatoSud(Right);
     this->B.getLatoSud(Back);
@@ -320,11 +320,12 @@ void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float
     drawTessera3D(window, x - altezza * 2, y + size, DOWN, *D.getSE(), sfondo, size);
 }
 
-void Cubo::draw(sf::RenderWindow &window, float x, float y, float lato)
+void Cubo::draw(sf::RenderWindow &window, float x, float y, float lato, float dist)
 {
-    float dist = 10.f, size = lato / 3;
-    this->draw2D(window, WIDTH / 2 - dist * 3, HEIGHT / 3 - dist * 2, size * 2 / 3);
-    this->draw_3D_FRU(window, x + lato * 3 / 2, y + dist + lato, size);
-    this->draw_3D_BLD_rotated(window, x + WIDTH * 5 / 6, y + HEIGHT * 4 / 5, size / 2);
-    this->draw_3D_BLD_cutted(window, x + lato, y + lato * 3 - dist, size);
+    float size = lato / 3;
+    float x_2d = x + size*7, y_3d = y + lato - size / 2 + dist;
+    this->draw2D(window, x_2d, y_3d, size * 2 / 3);
+    this->draw_3D_FRU(window, x + lato, y + dist + lato, size);
+    this->draw_3D_BLD_cutted(window, x + lato * 3 / 2, y + lato * 3 - dist, size);
+    this->draw_3D_BLD_rotated(window, x_2d + lato * 2, y_3d + lato * 2, size / 2);
 }
