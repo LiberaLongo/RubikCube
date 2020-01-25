@@ -89,7 +89,7 @@ void Cubo::Front(int senso)
 }
 void Cubo::Right(int senso)
 {
-    ColoreRGB *Up[DIM], *Front[DIM], *Down[DIM], *Back[DIM];
+    ColoreRGB *Up[DIM], *Back[DIM], *Down[DIM], *Front[DIM];
     this->U.getLatoEst(Up);
     this->B.getLatoOvest(Back);
     this->D.getLatoEst(Down);
@@ -173,20 +173,20 @@ void Cubo::Left(int senso)
 }
 void Cubo::Down(int senso)
 {
-    ColoreRGB *Back[DIM], *Right[DIM], *Front[DIM], *Left[DIM];
-    this->B.getLatoSud(Back);
-    this->R.getLatoSud(Right);
+    ColoreRGB  *Front[DIM], *Right[DIM], *Back[DIM], *Left[DIM];
     this->F.getLatoSud(Front);
+    this->R.getLatoSud(Right);
+    this->B.getLatoSud(Back);
     this->L.getLatoSud(Left);
     switch (senso)
     {
     case ORARIO:
         this->D.move();
-        ruotaLatoOrario(Back, Right, Front, Left);
+        ruotaLatoOrario(Front, Right, Back, Left);
         break;
     case ANTIORARIO:
         this->D.move_anti();
-        ruotaLatoAntiorario(Back, Right, Front, Left);
+        ruotaLatoAntiorario(Front, Right, Back, Left);
         break;
     default:
         break;
