@@ -29,6 +29,10 @@ per maggiori informazioni sulla libreria
 per maggiori informazioni su come installare sfml su linux
 <https://www.sfml-dev.org/tutorials/2.5/start-linux.php>
 
+Oltre a questo assicurarsi di avere `g++` e `make` installati
+scrivendo i comandi da terminale e se serve
+installandoli secondo il metodo suggerito automaticamente.
+
 ## clonare il progetto
 
 con il terminale aperto

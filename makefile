@@ -32,6 +32,7 @@ all: app
 
 #cose per gestire oggetti di base
 $(O)utils.o: $(U)utils.cpp $(H)utils.hpp
+	mkdir output
 	$(COMPILE) $(U)utils.cpp -o $(O)utils.o
 
 $(O)Punto.o: $(U)Punto.cpp $(H)Punto.hpp
@@ -72,4 +73,4 @@ app: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -rf $(O)*.o app
+	rm -rf $(O)*.o app $(O)
