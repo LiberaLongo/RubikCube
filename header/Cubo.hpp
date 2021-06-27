@@ -26,6 +26,15 @@ class Cubo : public DisegnabileI
     private:
         //facce
         Faccia F, R, U, B, L, D;
+
+        //ruota in senso Orario
+        void Front(int senso);
+        void Right(int senso);
+        void Up(int senso);
+        void Back(int senso);
+        void Left(int senso);
+        void Down(int senso);
+
     
     public:
         Cubo(void);
@@ -34,13 +43,10 @@ class Cubo : public DisegnabileI
         virtual ~Cubo(void) {};
         //resetta
         void Reset(void);
-        //ruota in senso Orario
-        void Front(int senso);
-        void Right(int senso);
-        void Up(int senso);
-        void Back(int senso);
-        void Left(int senso);
-        void Down(int senso);
+	//fai una mossa, con 0 <= m <= 11
+	void MOSSA(int m);
+	//random
+	void Random(int n);
         //disegna le varie visuali
         void draw2D(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);

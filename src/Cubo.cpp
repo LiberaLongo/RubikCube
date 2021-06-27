@@ -1,4 +1,6 @@
 #include "../header/Cubo.hpp"
+#include <cstdlib>
+#include <ctime>
 
 void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, ColoreRGB colore, sf::Color bordo, float lato)
 {
@@ -32,11 +34,11 @@ void drawTessera3D(sf::RenderWindow &window, float x, float y, float angolo, Col
 Cubo::Cubo(void)
 {
     //facce
-    this->F = Faccia(ColoreRGB::Verde);
-    this->R = Faccia(ColoreRGB::Rosso);
+    this->F = Faccia(ColoreRGB::Rosso);
+    this->R = Faccia(ColoreRGB::Blu);
     this->U = Faccia(ColoreRGB::Viola);
-    this->B = Faccia(ColoreRGB::Blu);
-    this->L = Faccia(ColoreRGB::Arancio);
+    this->B = Faccia(ColoreRGB::Arancio);
+    this->L = Faccia(ColoreRGB::Verde);
     this->D = Faccia(ColoreRGB::Giallo);
     //facce
     this->Reset();
@@ -64,6 +66,54 @@ void Cubo::Reset(void)
     this->B.Reset();
     this->L.Reset();
     this->D.Reset();
+}
+//fai una mossa
+void Cubo::MOSSA(int m) {int senso;
+	//capisco se è di senso orario (0-5) o antiorario (6-11)
+	if(m < 6)
+		senso = ORARIO;
+	else
+		senso = ANTIORARIO;
+	//ora capisco la faccia utilizzando il resto della divisione per 6
+	switch (m % 6) {
+		case 0:
+			cout << "F";
+			this->Front(senso);
+			break;
+		case 1:
+			cout << "R";
+			this->Right(senso);
+			break;
+		case 2:
+			cout << "U";
+			this->Up(senso);
+			break;
+		case 3:
+			cout << "B";
+			this->Back(senso);
+			break;
+		case 4:
+			cout << "L";
+			this->Left(senso);
+			break;
+		case 5:
+			cout << "D";
+			this->Down(senso);
+			break;
+		default:
+			break;
+	}
+	if(senso == ANTIORARIO) cout << "'";
+}
+//randomizza
+void Cubo::Random(int n) {
+	cout << "Randomizzo: ";
+	srand(time(NULL));
+	for(int i = 0; i < n ; i++) {
+		//genero una delle possibili 12 mosse
+		int mossa = rand()%12;
+		this->MOSSA(mossa);
+	}
 }
 //ruota in senso Orario
 void Cubo::Front(int senso)

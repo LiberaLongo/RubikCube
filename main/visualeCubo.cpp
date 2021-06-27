@@ -27,6 +27,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
 
     //bottone per reset
     Button buttonReset = Button(x_or + sizeB, y_or + sizeB * 19 / 2 + 20.f, "Reset", sizeB * 9 / 2, sizeB * 3 / 2);
+    Button buttonRandomize = Button (575.f, 110.f + sizeB, "Random", sizeB*4, sizeB);
 
     //bottoni per le mosse
     //bottoni senso orario
@@ -47,10 +48,13 @@ int visualeCubo::Run(sf::RenderWindow &App)
     Button arrayButton[] = {buttonFront, buttonRight, buttonUp, buttonBack, buttonLeft, buttonDown,
                             buttonFront_anti, buttonRight_anti, buttonUp_anti, buttonBack_anti, buttonLeft_anti, buttonDown_anti};
     int array_dim = sizeof(arrayButton) / sizeof(arrayButton[0]);
+
+    //cout << "x = " << buttonUp_anti.getX() << " y = " << buttonDown_anti.getY() ;
+
     //un punto adibito a mouse click
     Punto mouseClick;
     bool haCliccato;
-
+    cout << "\t\t";
     //esegui il programma finchè la finestra è aperta
     while (Running)
     {
@@ -70,11 +74,14 @@ int visualeCubo::Run(sf::RenderWindow &App)
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                 if (buttonReset.checkMouse(mouseClick))
                 {
+	            cout << "\n Reset: \t";			
                     cubo.Reset();
                     haCliccato = true;
                     mossa = -1;
-                }
-                else
+                } else if(buttonRandomize.checkMouse(mouseClick)) {
+		    //20 mosse random
+		    cubo.Random(20);
+		} else 
                     //controlla quale bottone è stato premuto
                     for (int i = 0; i < array_dim; i++)
                     {
@@ -90,9 +97,39 @@ int visualeCubo::Run(sf::RenderWindow &App)
                 switch (event.key.code)
                 {
                 //tasto Esc
-                case sf::Keyboard::Escape:
+                case sf::Keyboard::Escape :
+		    cout << endl;
                     return VISUALE_MENU;
                     break;
+		//tasti FRUBLD
+		case sf::Keyboard::F :
+		    haCliccato = true;
+		    mossa = 0;
+		    break;
+		case sf::Keyboard::R :
+		    haCliccato = true;
+		    mossa = 1;
+		    break;
+		case sf::Keyboard::U :
+		    haCliccato = true;
+		    mossa = 2;
+		    break;
+		case sf::Keyboard::B :
+		    haCliccato = true;
+		    mossa = 3;
+		    break;
+		case sf::Keyboard::L :
+		    haCliccato = true;
+		    mossa = 4;
+		    break;
+		case sf::Keyboard::D :
+		    haCliccato = true;
+		    mossa = 5;
+		    break;
+		/*case sf::Keyboard:: :
+		    haCliccato = true;
+		    mossa = ;
+		    break;*/
                 default:
                     break;
                 }
@@ -101,47 +138,8 @@ int visualeCubo::Run(sf::RenderWindow &App)
             }
             if (haCliccato)
             {
-                switch (mossa)
-                {
-                case 0:
-                    cubo.Front(ORARIO);
-                    break;
-                case 1:
-                    cubo.Right(ORARIO);
-                    break;
-                case 2:
-                    cubo.Up(ORARIO);
-                    break;
-                case 3:
-                    cubo.Back(ORARIO);
-                    break;
-                case 4:
-                    cubo.Left(ORARIO);
-                    break;
-                case 5:
-                    cubo.Down(ORARIO);
-                    break;
-                case 6 + 0:
-                    cubo.Front(ANTIORARIO);
-                    break;
-                case 6 + 1:
-                    cubo.Right(ANTIORARIO);
-                    break;
-                case 6 + 2:
-                    cubo.Up(ANTIORARIO);
-                    break;
-                case 6 + 3:
-                    cubo.Back(ANTIORARIO);
-                    break;
-                case 6 + 4:
-                    cubo.Left(ANTIORARIO);
-                    break;
-                case 6 + 5:
-                    cubo.Down(ANTIORARIO);
-                    break;
-                default:
-                    break;
-                }
+		cubo.MOSSA(mossa);
+		haCliccato = false;
             }
         }
 
@@ -152,8 +150,10 @@ int visualeCubo::Run(sf::RenderWindow &App)
         buttonReset.setChecked(false);
         if (mossa != -1)
             arrayButton[mossa].setChecked(true);
-        else
+        else{
             buttonReset.setChecked(true);
+	    buttonRandomize.setChecked(true);
+	}
 
         //pulisci la finestra colorandola di nero
         App.clear(sf::Color::Black);
@@ -163,6 +163,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
             arrayButton[i].draw(App);
         }
         buttonReset.draw(App);
+	buttonRandomize.draw(App);
         cubo.draw(App, 0.f, 0.f, lato, 10.f);
         //fine del frame corrente
         App.display();
