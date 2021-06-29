@@ -108,13 +108,14 @@ void Cubo::MOSSA(int m) {int senso;
 }
 //randomizza
 void Cubo::Random(int n) {
-	cout << "Randomizzo: ";
+	cout << "\nRandomizzo: ";
 	srand(time(NULL));
 	for(int i = 0; i < n ; i++) {
 		//genero una delle possibili 12 mosse
 		int mossa = rand()%12;
 		this->MOSSA(mossa);
 	}
+	cout << endl;
 }
 //ruota in senso Orario
 void Cubo::Front(int senso)
@@ -384,7 +385,6 @@ void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float
 
 void Cubo::draw(sf::RenderWindow &window)
 {
-	float lato = size*3;
 	this->draw2D(window, x+350.f, y+135.f, size * 2 / 3);
 	this->draw_3D_FRU(window, x+150.f, y+160.f, size);
 	this->draw_3D_BLD_cutted(window, x+225.f, y+440.f, size);
@@ -394,23 +394,26 @@ void Cubo::drawFreccia(sf::RenderWindow &window, int m) {
 	float x = this->x + 640.f;
 	float y = this->y + 410.f;
 	float size = this->size / 3; //this->size = 50, size = 16,6 con 6 periodico
+	//dim è metà del lato di una tessera
+	float dim = size / 2;
+    	float alt = size * sqrt(3) /2;
 	//freccia
 	Freccia freccia1, freccia2;
 	//punti sulla faccia UP
-	Punto A = Punto(x - size * 5, y);
-	Punto B = Punto(x, y);
-	Punto C = Punto(x, y);
-	Punto D = Punto(x, y);
+	Punto A = Punto(x		, y - dim * 5);
+	Punto B = Punto(x + alt * 2	, y - dim * 3);
+	Punto C = Punto(x		, y - dim * 1);
+	Punto D = Punto(x - alt * 2	, B.getY()); //stessa y di B
 	//punti sulla faccia Front
-	Punto E = Punto(x, y);
-	Punto F = Punto(x, y);
-	Punto G = Punto(x, y);
-	Punto H = Punto(x, y);
+	Punto E = Punto(x - alt*5/2	, y - dim*3/2);
+	Punto F = Punto(x - alt / 2	, y + dim / 2);
+	Punto G = Punto(x - alt / 2	, y + dim * 5); //non sono sicura di y
+	Punto H = Punto(x - alt*5/2	, y + dim * 3); // non sono sicura di y 
 	//punti sulla faccia Right
-	Punto I = Punto(x, y);
-	Punto L = Punto(x, y);
-	Punto M = Punto(x, y);
-	Punto N = Punto(x, y);
+	Punto I = Punto(x + alt / 2	, F.getY()); //stessa y di F
+	Punto L = Punto(x + alt*5/2	, E.getY()); //stessa y di E
+	Punto M = Punto(x + alt*5/2	, H.getY()); //stessa y di H
+	Punto N = Punto(x + alt / 2	, G.getY()); //stessa y di G
 	switch (m % 6) {
 		case 0: //Front
 			freccia1 = Freccia("F", D, C);

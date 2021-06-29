@@ -47,6 +47,7 @@ void Freccia::draw(sf::RenderWindow &window) {
 	window.draw(line, 2, sf::Lines);*/
 	sf::ConvexShape arrow;
 	arrow.setPointCount(4);
+	//TODO: offset dovrebbe essere perpendicolare
 	arrow.setPoint(0, sf::Vector2f(
 		  this->inizio.getX() - this->offset
 		, this->inizio.getY() - this->offset

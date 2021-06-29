@@ -52,7 +52,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
     //un punto adibito a mouse click
     Punto mouseClick;
     bool haCliccato;
-    cout << "\t\t";
+    cout << endl;
     //esegui il programma finchè la finestra è aperta
     while (Running)
     {
@@ -72,7 +72,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                 if (buttonReset.checkMouse(mouseClick))
                 {
-	            cout << "\n Reset: \t";			
+	            cout << "\nReset: \t";			
                     cubo.Reset();
                     haCliccato = true;
                     mossa = -1;

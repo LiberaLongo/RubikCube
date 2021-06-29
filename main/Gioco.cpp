@@ -6,7 +6,7 @@ Cubo cubo;
 
 void impostazioniGioco(void)
 {
-	cout << "\nINIZIA IL GIOCO!\n";
+	cout << "\nINIZIA IL GIOCO!";
 }
 
 int Gioco(void)
