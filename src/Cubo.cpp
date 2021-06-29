@@ -407,8 +407,8 @@ void Cubo::drawFreccia(sf::RenderWindow &window, int m) {
 	//punti sulla faccia Front
 	Punto E = Punto(x - alt*5/2	, y - dim*3/2);
 	Punto F = Punto(x - alt / 2	, y + dim / 2);
-	Punto G = Punto(x - alt / 2	, y + dim * 5); //non sono sicura di y
-	Punto H = Punto(x - alt*5/2	, y + dim * 3); // non sono sicura di y 
+	Punto G = Punto(x - alt / 2	, y + dim*9/2); //non sono sicura di y
+	Punto H = Punto(x - alt*5/2	, y + dim*5/2); // non sono sicura di y 
 	//punti sulla faccia Right
 	Punto I = Punto(x + alt / 2	, F.getY()); //stessa y di F
 	Punto L = Punto(x + alt*5/2	, E.getY()); //stessa y di E
@@ -436,8 +436,8 @@ void Cubo::drawFreccia(sf::RenderWindow &window, int m) {
 			freccia2 = Freccia("L", E, H);
 			break;
 		case 5: //Down
-			freccia1 = Freccia("F", H, G);
-			freccia2 = Freccia("F", N, M);
+			freccia1 = Freccia("D", H, G);
+			freccia2 = Freccia("D", N, M);
 		default:
 			break;
 	}

@@ -12,8 +12,8 @@ class Freccia : public DisegnabileI {
 private:
 	Punto inizio = Punto(0, 0);
 	Punto fine = Punto(100, 0);
-	float size = 10.f;
-	float offset = 2.f;
+	float size = 5.f;
+	float offset = 1.f;
 	string testo = "";
 	ColoreRGB color = ColoreRGB(50, 50, 50);
 public:

@@ -2,19 +2,12 @@
 
 //costruttore vuoto
 Freccia::Freccia() {
-	this->inizio = Punto(0, 0);
-	this->fine = Punto(100, 0);
-	this->size = 10.f;
-	this->testo = "";
-	ColoreRGB color = ColoreRGB(0, 0, 0);
 }
 //costruttore usato
 Freccia::Freccia(string testo, Punto p1, Punto p2) {
 	this->inizio = p1;
 	this->fine = p2;
-	this->size = 10.f;
 	this->testo = testo;
-	ColoreRGB color = ColoreRGB(0, 0, 0);
 }
 //costruttore completo
 Freccia::Freccia(string testo, Punto p1, Punto p2, float size, ColoreRGB colore) {
@@ -65,10 +58,13 @@ void Freccia::draw(sf::RenderWindow &window) {
 		, this->fine.getY() - this->offset
 		));
 	arrow.setFillColor(this->color.getColorLib());
+	//draw
 	window.draw(arrow);
-
-	sf::CircleShape triangle(this->size, 3);
-	triangle.setPosition(this->fine.getX(), this->fine.getY());
+	sf::CircleShape triangle(this->size, 6);
+	triangle.setPosition(this->fine.getX() - this->size, this->fine.getY() - this->size);
+	triangle.setFillColor(this->color.getColorLib());
+	//draw
+	window.draw(triangle);
 	//font e testo
 	sf::Font font;
 	sf::Text text;
@@ -79,16 +75,16 @@ void Freccia::draw(sf::RenderWindow &window) {
 		return;
 	}
 	//punto medio per il testo
-	float medio_x = (this->inizio.getX() + this->fine.getX()) / 2 ;
-	float medio_y = (this->inizio.getY() + this->fine.getY()) / 2 ;
+	float medio_x = (this->inizio.getX() + this->fine.getX()) / 2 + this->offset ;
+	float medio_y = (this->inizio.getY() + this->fine.getY()) / 2 + this->offset;
 	Punto medio = Punto(medio_x, medio_y);
 	//setto il buttonText
 	text.setFont(font);
-	text.setCharacterSize(this->size);
+	text.setCharacterSize(this->size*2);
 	text.setString(this->testo);
 	text.setPosition(medio.getPuntoLib());
+	text.setFillColor(this->color.getColorLib());
 	//draw
-	//window.draw(triangle);
-	//window.draw(text);
+	window.draw(text);
 }
 
