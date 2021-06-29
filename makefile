@@ -23,7 +23,7 @@ COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = $(O)utils.o $(O)Punto.o $(O)ColoreRGB.o $(O)Button.o \
-	$(O)Faccia.o $(O)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o \
+	$(O)Faccia.o $(O)Freccia.o $(O)Cubo.o $(O)visualeMenu.o $(O)visualeCubo.o \
 	$(O)Gioco.o $(O)main.o
 
 all: app
@@ -48,7 +48,10 @@ $(O)Button.o: $(U)Button.cpp $(H)Button.hpp
 $(O)Faccia.o: $(S)Faccia.cpp $(H)Faccia.hpp
 	$(COMPILE) $(S)Faccia.cpp -o $(O)Faccia.o
 
-$(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp
+$(O)Freccia.o: $(S)Freccia.cpp $(H)Freccia.hpp
+	$(COMPILE) $(S)Freccia.cpp -o $(O)Freccia.o
+
+$(O)Cubo.o: $(S)Cubo.cpp $(H)Cubo.hpp $(H)Freccia.hpp
 	$(COMPILE) $(S)Cubo.cpp -o $(O)Cubo.o
 
 # cose per gestire visuali

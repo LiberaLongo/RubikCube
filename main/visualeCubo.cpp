@@ -22,8 +22,6 @@ int visualeCubo::Run(sf::RenderWindow &App)
     float sizeB = min(WIDTH / 4, HEIGHT / 3) / 4;
     float x_or = sizeB * 13 / 2, y_or = 0.f;
     float x_anti = x_or + sizeB * 4, y_anti = 0.f;
-    //dimensione lato del cubo
-    float lato = sizeB * 3;
 
     //bottone per reset
     Button buttonReset = Button(x_or + sizeB, y_or + sizeB * 19 / 2 + 20.f, "Reset", sizeB * 9 / 2, sizeB * 3 / 2);
@@ -164,7 +162,10 @@ int visualeCubo::Run(sf::RenderWindow &App)
         }
         buttonReset.draw(App);
 	buttonRandomize.draw(App);
-        cubo.draw(App, 0.f, 0.f, lato, 10.f);
+	//cubo.setCanvas(0.f, 0.f, sizeB, 10.f); //lato = sizeB * 3 
+        cubo.draw(App);
+	//disegno la freccia (solo la freccia) della mossa che ho fatto)
+	cubo.drawFreccia(App, mossa);
         //fine del frame corrente
         App.display();
     }

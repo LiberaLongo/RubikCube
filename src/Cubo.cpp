@@ -104,6 +104,7 @@ void Cubo::MOSSA(int m) {int senso;
 			break;
 	}
 	if(senso == ANTIORARIO) cout << "'";
+	else cout << " ";
 }
 //randomizza
 void Cubo::Random(int n) {
@@ -243,9 +244,17 @@ void Cubo::Down(int senso)
     }
 }
 
+//set canvas info per disegnare
+void Cubo::setCanvas(float x, float y, float size, float dist) {
+	this->x = x;
+	this->y = y;
+	this->size = size;
+	this->dist = dist;
+};
 //disegna
 void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
 {
+    //cout << "\n 2D: x = " << x << ", y = " << y << "size = " << size;
     //lunghezza del lato
     float lato = size * DIM;
     this->F.drawN(window, x + 1 * lato, y + 1 * lato, size);
@@ -257,6 +266,7 @@ void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
 }
 void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
 {
+    //cout << "\n 3D_FRU: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::White;
     float altezza = size * sqrt(3) / 2;
     //FRONT
@@ -293,6 +303,7 @@ void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
 
 void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size)
 {
+    //cout << "\n 3D_BLD_cutted: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::Cyan;
     //visuale ottenuta "tagliando il cubo" come fosse una camera su thesims
     sf::CircleShape exagon(size * 3, 6);
@@ -335,6 +346,7 @@ void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float 
 
 void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size)
 {
+    //cout << "\n 3D_BLD_rotated: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::White;
     //visuale ottenuta ruotando il cubo
     float altezza = size * sqrt(3) / 2;
@@ -370,12 +382,64 @@ void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float
     drawTessera3D(window, x - altezza * 2, y + size, DOWN, *D.getSE(), sfondo, size);
 }
 
-void Cubo::draw(sf::RenderWindow &window, float x, float y, float lato, float dist)
+void Cubo::draw(sf::RenderWindow &window)
 {
-    float size = lato / 3;
-    float x_2d = x + size*7, y_3d = y + lato - size / 2 + dist;
-    this->draw2D(window, x_2d, y_3d, size * 2 / 3);
-    this->draw_3D_FRU(window, x + lato, y + dist + lato, size);
-    this->draw_3D_BLD_cutted(window, x + lato * 3 / 2, y + lato * 3 - dist, size);
-    this->draw_3D_BLD_rotated(window, x_2d + lato * 2, y_3d + lato * 2, size / 2);
+	float lato = size*3;
+	this->draw2D(window, x+350.f, y+135.f, size * 2 / 3);
+	this->draw_3D_FRU(window, x+150.f, y+160.f, size);
+	this->draw_3D_BLD_cutted(window, x+225.f, y+440.f, size);
+	this->draw_3D_BLD_rotated(window, x+720.f, y+500.f, size / 3);
+}
+void Cubo::drawFreccia(sf::RenderWindow &window, int m) {
+	float x = this->x + 640.f;
+	float y = this->y + 410.f;
+	float size = this->size / 3; //this->size = 50, size = 16,6 con 6 periodico
+	//freccia
+	Freccia freccia1, freccia2;
+	//punti sulla faccia UP
+	Punto A = Punto(x - size * 5, y);
+	Punto B = Punto(x, y);
+	Punto C = Punto(x, y);
+	Punto D = Punto(x, y);
+	//punti sulla faccia Front
+	Punto E = Punto(x, y);
+	Punto F = Punto(x, y);
+	Punto G = Punto(x, y);
+	Punto H = Punto(x, y);
+	//punti sulla faccia Right
+	Punto I = Punto(x, y);
+	Punto L = Punto(x, y);
+	Punto M = Punto(x, y);
+	Punto N = Punto(x, y);
+	switch (m % 6) {
+		case 0: //Front
+			freccia1 = Freccia("F", D, C);
+			freccia2 = Freccia("F", I, N);
+			break;
+		case 1: //Right
+			freccia1 = Freccia("R", G, F);
+			freccia2 = Freccia("R", C, B);
+			break;
+		case 2: //Up
+			freccia1 = Freccia("U", L, I);
+			freccia2 = Freccia("U", F, E);
+			break;
+		case 3: //Back
+			freccia1 = Freccia("B", M, L);
+			freccia2 = Freccia("B", B, A);
+			break;
+		case 4: //Left
+			freccia1 = Freccia("L", A, D);
+			freccia2 = Freccia("L", E, H);
+			break;
+		case 5: //Down
+			freccia1 = Freccia("F", H, G);
+			freccia2 = Freccia("F", N, M);
+		default:
+			break;
+	}
+	//un altro FRU più piccolo per le freccie
+	this->draw_3D_FRU(window, x, y, size);
+	freccia1.draw(window);
+	freccia2.draw(window);
 }

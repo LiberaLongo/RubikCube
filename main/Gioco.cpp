@@ -22,7 +22,9 @@ int Gioco(void)
 	int screen = 0;
 
 	//Window creation
-	sf::RenderWindow App(sf::VideoMode(WIDTH, HEIGHT), "SFML RubiKube by LLibera");
+	sf::RenderWindow App(sf::VideoMode(WIDTH, HEIGHT), "SFML RubiKube by LLibera"
+				, sf::Style::Fullscreen
+				);
 
 	//Preparazione delle visuali
 	visualeMenu vM;
