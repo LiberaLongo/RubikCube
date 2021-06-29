@@ -27,9 +27,6 @@ class Cubo : public DisegnabileI
     private:
         //facce
         Faccia F, R, U, B, L, D;
-	//info per disegnare
-	float x = 0.f, y = 0.f, dist = 10.f;
-	float size = min(WIDTH / 4, HEIGHT / 3) / 4;
 
         //ruota in senso Orario
         void Front(int senso);
@@ -51,18 +48,17 @@ class Cubo : public DisegnabileI
 	void MOSSA(int m);
 	//random
 	void Random(int n);
-	//set canvas info per disegnare
-	void setCanvas(float x, float y, float size, float dist);
         //disegna le varie visuali
         void draw2D(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size);
-        //disegna il cubo
-        void draw(sf::RenderWindow &window);
 	//disegna freccia m % 6 (quindi solo una freccia in senso orario,
 	//anche se la mossa è in senso antiorario... modifico dopo forse
-	void drawFreccia(sf::RenderWindow &window, int m);
+	void drawFreccia(sf::RenderWindow &window, int m, float x, float y, float size);
+        //disegna il cubo
+        void draw(sf::RenderWindow &window, int m, float x, float y, float size);
+        void draw(sf::RenderWindow &window, int m);
 };
 
 #endif //CUBO_HPP

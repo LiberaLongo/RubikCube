@@ -162,10 +162,7 @@ int visualeCubo::Run(sf::RenderWindow &App)
         }
         buttonReset.draw(App);
 	buttonRandomize.draw(App);
-	//cubo.setCanvas(0.f, 0.f, sizeB, 10.f); //lato = sizeB * 3 
-        cubo.draw(App);
-	//disegno la freccia (solo la freccia) della mossa che ho fatto)
-	cubo.drawFreccia(App, mossa);
+        cubo.draw(App, mossa);
         //fine del frame corrente
         App.display();
     }

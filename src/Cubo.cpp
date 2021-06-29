@@ -245,13 +245,6 @@ void Cubo::Down(int senso)
     }
 }
 
-//set canvas info per disegnare
-void Cubo::setCanvas(float x, float y, float size, float dist) {
-	this->x = x;
-	this->y = y;
-	this->size = size;
-	this->dist = dist;
-};
 //disegna
 void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
 {
@@ -382,67 +375,74 @@ void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float
     drawTessera3D(window, x - altezza, y + size / 2, DOWN, *D.getSud(), sfondo, size);
     drawTessera3D(window, x - altezza * 2, y + size, DOWN, *D.getSE(), sfondo, size);
 }
-
-void Cubo::draw(sf::RenderWindow &window)
+//disegno le eventuali freccie sulla visuale del cubo con x, y, size di mossa m
+void Cubo::drawFreccia(sf::RenderWindow &window, int m, float x, float y, float size) {
+	if(0 <= m && m <= 11) {
+		//dim è metà del lato di una tessera
+		float dim = size / 2;
+	    	float alt = size * sqrt(3) /2;
+		//freccia
+		Freccia freccia1, freccia2;
+		//punti sulla faccia UP
+		Punto A = Punto(x		, y - dim * 5);
+		Punto B = Punto(x + alt * 2	, y - dim * 3);
+		Punto C = Punto(x		, y - dim * 1);
+		Punto D = Punto(x - alt * 2	, B.getY()); //stessa y di B
+		//punti sulla faccia Front
+		Punto E = Punto(x - alt*5/2	, y - dim*3/2);
+		Punto F = Punto(x - alt / 2	, y + dim / 2);
+		Punto G = Punto(x - alt / 2	, y + dim*9/2); //non sono sicura di y
+		Punto H = Punto(x - alt*5/2	, y + dim*5/2); // non sono sicura di y 
+		//punti sulla faccia Right
+		Punto I = Punto(x + alt / 2	, F.getY()); //stessa y di F
+		Punto L = Punto(x + alt*5/2	, E.getY()); //stessa y di E
+		Punto M = Punto(x + alt*5/2	, H.getY()); //stessa y di H
+		Punto N = Punto(x + alt / 2	, G.getY()); //stessa y di G
+		switch (m % 6) {
+			case 0: //Front
+				freccia1 = Freccia("F", D, C);
+				freccia2 = Freccia("F", I, N);
+				break;
+			case 1: //Right
+				freccia1 = Freccia("R", G, F);
+				freccia2 = Freccia("R", C, B);
+				break;
+			case 2: //Up
+				freccia1 = Freccia("U", L, I);
+				freccia2 = Freccia("U", F, E);
+				break;
+			case 3: //Back
+				freccia1 = Freccia("B", M, L);
+				freccia2 = Freccia("B", B, A);
+				break;
+			case 4: //Left
+				freccia1 = Freccia("L", A, D);
+				freccia2 = Freccia("L", E, H);
+				break;
+			case 5: //Down
+				freccia1 = Freccia("D", H, G);
+				freccia2 = Freccia("D", N, M);
+			default:
+				break;
+		}
+		freccia1.draw(window);
+		freccia2.draw(window);
+	}
+}
+void Cubo::draw(sf::RenderWindow &window, int m, float x, float y, float size)
 {
 	this->draw2D(window, x+350.f, y+135.f, size * 2 / 3);
 	this->draw_3D_FRU(window, x+150.f, y+160.f, size);
 	this->draw_3D_BLD_cutted(window, x+225.f, y+440.f, size);
 	this->draw_3D_BLD_rotated(window, x+720.f, y+500.f, size / 3);
-}
-void Cubo::drawFreccia(sf::RenderWindow &window, int m) {
-	float x = this->x + 640.f;
-	float y = this->y + 410.f;
-	float size = this->size / 3; //this->size = 50, size = 16,6 con 6 periodico
-	//dim è metà del lato di una tessera
-	float dim = size / 2;
-    	float alt = size * sqrt(3) /2;
-	//freccia
-	Freccia freccia1, freccia2;
-	//punti sulla faccia UP
-	Punto A = Punto(x		, y - dim * 5);
-	Punto B = Punto(x + alt * 2	, y - dim * 3);
-	Punto C = Punto(x		, y - dim * 1);
-	Punto D = Punto(x - alt * 2	, B.getY()); //stessa y di B
-	//punti sulla faccia Front
-	Punto E = Punto(x - alt*5/2	, y - dim*3/2);
-	Punto F = Punto(x - alt / 2	, y + dim / 2);
-	Punto G = Punto(x - alt / 2	, y + dim*9/2); //non sono sicura di y
-	Punto H = Punto(x - alt*5/2	, y + dim*5/2); // non sono sicura di y 
-	//punti sulla faccia Right
-	Punto I = Punto(x + alt / 2	, F.getY()); //stessa y di F
-	Punto L = Punto(x + alt*5/2	, E.getY()); //stessa y di E
-	Punto M = Punto(x + alt*5/2	, H.getY()); //stessa y di H
-	Punto N = Punto(x + alt / 2	, G.getY()); //stessa y di G
-	switch (m % 6) {
-		case 0: //Front
-			freccia1 = Freccia("F", D, C);
-			freccia2 = Freccia("F", I, N);
-			break;
-		case 1: //Right
-			freccia1 = Freccia("R", G, F);
-			freccia2 = Freccia("R", C, B);
-			break;
-		case 2: //Up
-			freccia1 = Freccia("U", L, I);
-			freccia2 = Freccia("U", F, E);
-			break;
-		case 3: //Back
-			freccia1 = Freccia("B", M, L);
-			freccia2 = Freccia("B", B, A);
-			break;
-		case 4: //Left
-			freccia1 = Freccia("L", A, D);
-			freccia2 = Freccia("L", E, H);
-			break;
-		case 5: //Down
-			freccia1 = Freccia("D", H, G);
-			freccia2 = Freccia("D", N, M);
-		default:
-			break;
-	}
 	//un altro FRU più piccolo per le freccie
-	this->draw_3D_FRU(window, x, y, size);
-	freccia1.draw(window);
-	freccia2.draw(window);
+	float x_f = x + 640.f;
+	float y_f = y + 410.f;
+	float s_f = size/3;
+	this->draw_3D_FRU(window, x_f, y_f, s_f);
+	//disegno la freccia (del FRU più piccolo) della mossa che ho fatto)
+	this->drawFreccia(window, m, x_f, y_f, s_f); 
+}
+void Cubo::draw(sf::RenderWindow &window, int m) {
+	this->draw(window, m, 0.f, 0.f, 50.f);
 }
