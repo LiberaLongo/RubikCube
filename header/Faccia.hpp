@@ -39,11 +39,8 @@ public:
     void move(void);
     void move_anti(void);
 
-    //disegna 2D con il Nord rivolto verso... NSWO
+    //disegna 2D con il Nord rivolto verso... l'alto
     void drawN(sf::RenderWindow &window, float x, float y, float size);
-    void drawS(sf::RenderWindow &window, float x, float y, float size);
-    void drawW(sf::RenderWindow &window, float x, float y, float size);
-    void drawO(sf::RenderWindow &window, float x, float y, float size);
 
     //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
     ColoreRGB* getCentro(void);
@@ -56,7 +53,7 @@ public:
     ColoreRGB* getSE(void);
     ColoreRGB* getSW(void);
 
-    //metto nel vettore i puntatori a tre faccie sullo stesso lato
+    //metto nel vettore i puntatori a tre tessere sullo stesso lato
     void getLatoNord(ColoreRGB* lato[DIM]);
     void getLatoEst(ColoreRGB* lato[DIM]);
     void getLatoSud(ColoreRGB* lato[DIM]);

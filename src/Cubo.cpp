@@ -40,8 +40,6 @@ Cubo::Cubo(void)
     this->B = Faccia(ColoreRGB::Arancio);
     this->L = Faccia(ColoreRGB::Verde);
     this->D = Faccia(ColoreRGB::Giallo);
-    //facce
-    this->Reset();
 }
 
 Cubo::Cubo(ColoreRGB front, ColoreRGB right, ColoreRGB up, ColoreRGB back, ColoreRGB left, ColoreRGB down)
@@ -300,10 +298,6 @@ void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float 
     //cout << "\n 3D_BLD_cutted: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::Cyan;
     //visuale ottenuta "tagliando il cubo" come fosse una camera su thesims
-    sf::CircleShape exagon(size * 3, 6);
-    exagon.setPosition({x - size * 3, y - size * 3});
-    exagon.setFillColor(sf::Color::Magenta);
-    window.draw(exagon);
     //cutted
     float altezza = size * sqrt(3) / 2;
     //BACK -> destra

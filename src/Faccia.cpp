@@ -94,16 +94,6 @@ void Faccia::drawN(sf::RenderWindow &window, float x, float y, float size)
             drawTessera2D(window, tessere[i][j], xj, yi, size);
         }
 }
-void Faccia::drawS(sf::RenderWindow &window, float x, float y, float size)
-{
-}
-void Faccia::drawW(sf::RenderWindow &window, float x, float y, float size)
-{
-}
-void Faccia::drawO(sf::RenderWindow &window, float x, float y, float size)
-{
-}
-
 //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
 ColoreRGB *Faccia::getCentro(void)
 {
