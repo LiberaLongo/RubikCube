@@ -50,6 +50,14 @@ class Cubo : public DisegnabileI
 	void Random(int n);
         //disegna le varie visuali
         void draw2D(sf::RenderWindow &window, float x, float y, float size);
+        //visualizza 3D le visuali usando vettori per colori (per rotazioni del cubo?)
+	void draw_3D_FRU_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB front[DIM*DIM], ColoreRGB right[DIM*DIM], ColoreRGB up[DIM*DIM]);
+        void draw_3D_BLD_rotated_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM]);
+        void draw_3D_BLD_cutted_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM]);
+	//disegna 3D le visuali "normali"
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size);

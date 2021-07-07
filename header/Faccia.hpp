@@ -43,6 +43,9 @@ public:
     void drawN(sf::RenderWindow &window, float x, float y, float size);
 
     //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
+    //dopo aver riletto : perchè uso i puntatori?
+    //per leggibilità, infatti in getLato... chiamo queste funzioni
+    //(e il compilatore non permette di avere un puntatore a cose temporanee)
     ColoreRGB* getCentro(void);
     ColoreRGB* getNord(void);
     ColoreRGB* getEst(void);
@@ -58,5 +61,6 @@ public:
     void getLatoEst(ColoreRGB* lato[DIM]);
     void getLatoSud(ColoreRGB* lato[DIM]);
     void getLatoOvest(ColoreRGB* lato[DIM]);
+    void getVettore(ColoreRGB vector[DIM*DIM]);
 };
 #endif //FACCIA_HPP

@@ -40,6 +40,8 @@ Cubo::Cubo(void)
     this->B = Faccia(ColoreRGB::Arancio);
     this->L = Faccia(ColoreRGB::Verde);
     this->D = Faccia(ColoreRGB::Giallo);
+    //facce
+    this->Reset();
 }
 
 Cubo::Cubo(ColoreRGB front, ColoreRGB right, ColoreRGB up, ColoreRGB back, ColoreRGB left, ColoreRGB down)
@@ -118,7 +120,7 @@ void Cubo::Random(int n) {
 //ruota in senso Orario
 void Cubo::Front(int senso)
 {
-    ColoreRGB *Up[DIM], *Right[DIM], *Down[DIM], *Left[DIM];
+    ColoreRGB * Up[DIM], * Right[DIM], * Down[DIM], * Left[DIM];
     this->U.getLatoSud(Up);
     this->R.getLatoOvest(Right);
     this->D.getLatoNord(Down);
@@ -139,7 +141,7 @@ void Cubo::Front(int senso)
 }
 void Cubo::Right(int senso)
 {
-    ColoreRGB *Up[DIM], *Back[DIM], *Down[DIM], *Front[DIM];
+    ColoreRGB * Up[DIM], * Back[DIM], * Down[DIM], * Front[DIM];
     this->U.getLatoEst(Up);
     this->B.getLatoOvest(Back);
     this->D.getLatoEst(Down);
@@ -160,7 +162,7 @@ void Cubo::Right(int senso)
 }
 void Cubo::Up(int senso)
 {
-    ColoreRGB *Back[DIM], *Right[DIM], *Front[DIM], *Left[DIM];
+    ColoreRGB * Back[DIM], * Right[DIM], * Front[DIM], * Left[DIM];
     this->B.getLatoNord(Back);
     this->R.getLatoNord(Right);
     this->F.getLatoNord(Front);
@@ -181,7 +183,7 @@ void Cubo::Up(int senso)
 }
 void Cubo::Back(int senso)
 {
-    ColoreRGB *Up[DIM], *Left[DIM], *Down[DIM], *Right[DIM];
+    ColoreRGB *Up[DIM], * Left[DIM], * Down[DIM], * Right[DIM];
     this->U.getLatoNord(Up);
     this->L.getLatoOvest(Left);
     this->D.getLatoSud(Down);
@@ -202,7 +204,7 @@ void Cubo::Back(int senso)
 }
 void Cubo::Left(int senso)
 {
-    ColoreRGB *Up[DIM], *Front[DIM], *Down[DIM], *Back[DIM];
+    ColoreRGB *Up[DIM], *Front[DIM], * Down[DIM], * Back[DIM];
     this->U.getLatoOvest(Up);
     this->F.getLatoOvest(Front);
     this->D.getLatoOvest(Down);
@@ -223,7 +225,7 @@ void Cubo::Left(int senso)
 }
 void Cubo::Down(int senso)
 {
-    ColoreRGB *Front[DIM], *Right[DIM], *Back[DIM], *Left[DIM];
+    ColoreRGB *Front[DIM], *Right[DIM], * Back[DIM], * Left[DIM];
     this->F.getLatoSud(Front);
     this->R.getLatoSud(Right);
     this->B.getLatoSud(Back);
@@ -256,44 +258,46 @@ void Cubo::draw2D(sf::RenderWindow &window, float x, float y, float size)
     this->L.drawN(window, x + 0 * lato, y + 1 * lato, size);
     this->D.drawN(window, x + 1 * lato, y + 2 * lato, size);
 }
-void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size)
+void Cubo::draw_3D_FRU_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB front[DIM*DIM], ColoreRGB right[DIM*DIM], ColoreRGB up[DIM*DIM])
 {
     //cout << "\n 3D_FRU: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::White;
     float altezza = size * sqrt(3) / 2;
     //FRONT
-    drawTessera3D(window, x - altezza * 2, y - size, FRONT, *F.getNW(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size / 2, FRONT, *F.getNord(), sfondo, size);
-    drawTessera3D(window, x, y, FRONT, *F.getNE(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y, FRONT, *F.getOvest(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, FRONT, *F.getCentro(), sfondo, size);
-    drawTessera3D(window, x, y + size, FRONT, *F.getEst(), sfondo, size);
-    drawTessera3D(window, x, y + size * 2, FRONT, *F.getSE(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size * 3 / 2, FRONT, *F.getSud(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y + size, FRONT, *F.getSW(), sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y - size, FRONT, front[0], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size / 2, FRONT, front[1], sfondo, size);
+    drawTessera3D(window, x, y, FRONT, front[2], sfondo, size);
+    drawTessera3D(window, x, y + size, FRONT, front[3], sfondo, size);
+    drawTessera3D(window, x, y + size * 2, FRONT, front[4], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, FRONT, front[5], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y + size, FRONT, front[6], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y, FRONT, front[7], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size / 2, FRONT, front[8], sfondo, size);
     //RIGHT
-    drawTessera3D(window, x, y, RIGHT, *R.getNW(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size / 2, RIGHT, *R.getNord(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y - size, RIGHT, *R.getNE(), sfondo, size);
-    drawTessera3D(window, x, y + size, RIGHT, *R.getOvest(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, RIGHT, *R.getCentro(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y, RIGHT, *R.getEst(), sfondo, size);
-    drawTessera3D(window, x, y + size * 2, RIGHT, *R.getSW(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size * 3 / 2, RIGHT, *R.getSud(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y + size, RIGHT, *R.getSE(), sfondo, size);
+    drawTessera3D(window, x, y, RIGHT, right[0], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size / 2, RIGHT, right[1], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y - size, RIGHT, right[2], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y, RIGHT, right[3], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y + size, RIGHT, right[4], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, RIGHT, right[5], sfondo, size);
+    drawTessera3D(window, x, y + size * 2, RIGHT, right[6], sfondo, size);
+    drawTessera3D(window, x, y + size, RIGHT, right[7], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size / 2, RIGHT, right[8], sfondo, size);
     //UP
-    drawTessera3D(window, x, y - size * 2, UP, *U.getNW(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size * 3 / 2, UP, *U.getNord(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y - size, UP, *U.getNE(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size * 3 / 2, UP, *U.getOvest(), sfondo, size);
-    drawTessera3D(window, x, y - size, UP, *U.getCentro(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size / 2, UP, *U.getEst(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y - size, UP, *U.getSW(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size / 2, UP, *U.getSud(), sfondo, size);
-    drawTessera3D(window, x, y, UP, *U.getSE(), sfondo, size);
+    drawTessera3D(window, x, y - size * 2, UP, up[0], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, UP, up[1], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y - size, UP, up[2], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size / 2, UP, up[3], sfondo, size);
+    drawTessera3D(window, x, y, UP, up[4], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size / 2, UP, up[5], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y - size, UP, up[6], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, UP, up[7], sfondo, size);
+    drawTessera3D(window, x, y - size, UP, up[8], sfondo, size);
 }
-
-void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size)
+//void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size) {}
+void Cubo::draw_3D_BLD_cutted_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM])
 {
     //cout << "\n 3D_BLD_cutted: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::Cyan;
@@ -301,74 +305,99 @@ void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float 
     //cutted
     float altezza = size * sqrt(3) / 2;
     //BACK -> destra
-    drawTessera3D(window, x, y, DESTRA, *B.getSE(), sfondo, size);
-    drawTessera3D(window, x, y - size, DESTRA, *B.getEst(), sfondo, size);
-    drawTessera3D(window, x, y - size * 2, DESTRA, *B.getNE(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, DESTRA, *B.getSud(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size / 2, DESTRA, *B.getCentro(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size * 3 / 2, DESTRA, *B.getNord(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y + size, DESTRA, *B.getSW(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y, DESTRA, *B.getOvest(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y - size, DESTRA, *B.getNW(), sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y - size, DESTRA, back[0], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, DESTRA, back[1], sfondo, size);
+    drawTessera3D(window, x, y - size * 2, DESTRA, back[2], sfondo, size);
+    drawTessera3D(window, x, y - size, DESTRA, back[3], sfondo, size);
+    drawTessera3D(window, x, y, DESTRA, back[4], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size / 2, DESTRA, back[5], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y + size, DESTRA, back[6], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y, DESTRA, back[7], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size / 2, DESTRA, back[8], sfondo, size);
     //LEFT -> sinistra
-    drawTessera3D(window, x - altezza * 2, y + size, SINISTRA, *L.getSE(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y, SINISTRA, *L.getEst(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y - size, SINISTRA, *L.getNE(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, SINISTRA, *L.getSud(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size / 2, SINISTRA, *L.getCentro(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size * 3 / 2, SINISTRA, *L.getNord(), sfondo, size);
-    drawTessera3D(window, x, y, SINISTRA, *L.getSW(), sfondo, size);
-    drawTessera3D(window, x, y - size, SINISTRA, *L.getOvest(), sfondo, size);
-    drawTessera3D(window, x, y - size * 2, SINISTRA, *L.getNW(), sfondo, size);
+    drawTessera3D(window, x, y - size * 2, SINISTRA, left[0], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, SINISTRA, left[1], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y - size, SINISTRA, left[2], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y, SINISTRA, left[3], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y + size, SINISTRA, left[4], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size / 2, SINISTRA, left[5], sfondo, size);
+    drawTessera3D(window, x, y, SINISTRA, left[6], sfondo, size);
+    drawTessera3D(window, x, y - size, SINISTRA, left[7], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size / 2, SINISTRA, left[8], sfondo, size);
     //DOWN
-    drawTessera3D(window, x - altezza * 2, y + size, SOTTO, *D.getNW(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size * 3 / 2, SOTTO, *D.getNord(), sfondo, size);
-    drawTessera3D(window, x, y + size * 2, SOTTO, *D.getNE(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, SOTTO, *D.getOvest(), sfondo, size);
-    drawTessera3D(window, x, y + size, SOTTO, *D.getCentro(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size * 3 / 2, SOTTO, *D.getEst(), sfondo, size);
-    drawTessera3D(window, x, y, SOTTO, *D.getSW(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, SOTTO, *D.getSud(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y + size, SOTTO, *D.getSE(), sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y + size, SOTTO, down[0], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, SOTTO, down[1], sfondo, size);
+    drawTessera3D(window, x, y + size * 2, SOTTO, down[2], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, SOTTO, down[3], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y + size, SOTTO, down[4], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size / 2, SOTTO, down[5], sfondo, size);
+    drawTessera3D(window, x, y, SOTTO, down[6], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size / 2, SOTTO, down[7], sfondo, size);
+    drawTessera3D(window, x, y + size, SOTTO, down[8], sfondo, size);
 }
 
-void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size)
+void Cubo::draw_3D_BLD_rotated_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM])
 {
     //cout << "\n 3D_BLD_rotated: x = " << x << ", y = " << y << "size = " << size;
     sf::Color sfondo = sf::Color::White;
     //visuale ottenuta ruotando il cubo
     float altezza = size * sqrt(3) / 2;
     //BACK
-    drawTessera3D(window, x, y, BACK, *B.getSE(), sfondo, size);
-    drawTessera3D(window, x, y - size, BACK, *B.getEst(), sfondo, size);
-    drawTessera3D(window, x, y - size * 2, BACK, *B.getNE(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, BACK, *B.getSud(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size / 2, BACK, *B.getCentro(), sfondo, size);
-    drawTessera3D(window, x - altezza, y - size * 3 / 2, BACK, *B.getNord(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y + size, BACK, *B.getSW(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y, BACK, *B.getOvest(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y - size, BACK, *B.getNW(), sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y - size, BACK, back[0], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size * 3 / 2, BACK, back[1], sfondo, size);
+    drawTessera3D(window, x, y - size * 2, BACK, back[2], sfondo, size);
+    drawTessera3D(window, x, y - size, BACK, back[3], sfondo, size);
+    drawTessera3D(window, x, y, BACK, back[4], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size / 2, BACK, back[5], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y + size, BACK, back[6], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y, BACK, back[7], sfondo, size);
+    drawTessera3D(window, x - altezza, y - size / 2, BACK, back[8], sfondo, size);
     //LEFT
-    drawTessera3D(window, x + altezza * 2, y + size, LEFT, *L.getSE(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y, LEFT, *L.getEst(), sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y - size, LEFT, *L.getNE(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, LEFT, *L.getSud(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size / 2, LEFT, *L.getCentro(), sfondo, size);
-    drawTessera3D(window, x + altezza, y - size * 3 / 2, LEFT, *L.getNord(), sfondo, size);
-    drawTessera3D(window, x, y, LEFT, *L.getSW(), sfondo, size);
-    drawTessera3D(window, x, y - size, LEFT, *L.getOvest(), sfondo, size);
-    drawTessera3D(window, x, y - size * 2, LEFT, *L.getNW(), sfondo, size);
+    drawTessera3D(window, x, y - size * 2, LEFT, left[0], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size * 3 / 2, LEFT, left[1], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y - size, LEFT, left[2], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y, LEFT, left[3], sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y + size, LEFT, left[4], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size / 2, LEFT, left[5], sfondo, size);
+    drawTessera3D(window, x, y, LEFT, left[6], sfondo, size);
+    drawTessera3D(window, x, y - size, LEFT, left[7], sfondo, size);
+    drawTessera3D(window, x + altezza, y - size / 2, LEFT, left[8], sfondo, size);
     //DOWN
-    drawTessera3D(window, x + altezza * 2, y + size, DOWN, *D.getNW(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size * 3 / 2, DOWN, *D.getNord(), sfondo, size);
-    drawTessera3D(window, x, y + size * 2, DOWN, *D.getNE(), sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, DOWN, *D.getOvest(), sfondo, size);
-    drawTessera3D(window, x, y + size, DOWN, *D.getCentro(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size * 3 / 2, DOWN, *D.getEst(), sfondo, size);
-    drawTessera3D(window, x, y, DOWN, *D.getSW(), sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, DOWN, *D.getSud(), sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y + size, DOWN, *D.getSE(), sfondo, size);
+    drawTessera3D(window, x + altezza * 2, y + size, DOWN, down[0], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size * 3 / 2, DOWN, down[1], sfondo, size);
+    drawTessera3D(window, x, y + size * 2, DOWN, down[2], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size * 3 / 2, DOWN, down[3], sfondo, size);
+    drawTessera3D(window, x - altezza * 2, y + size, DOWN, down[4], sfondo, size);
+    drawTessera3D(window, x - altezza, y + size / 2, DOWN, down[5], sfondo, size);
+    drawTessera3D(window, x, y, DOWN, down[6], sfondo, size);
+    drawTessera3D(window, x + altezza, y + size / 2, DOWN, down[7], sfondo, size);
+    drawTessera3D(window, x, y + size, DOWN, down[8], sfondo, size);
 }
+
+
+void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size) {
+	ColoreRGB front[DIM*DIM], right[DIM*DIM], up[DIM*DIM];
+	this->F.getVettore(front);
+	this->R.getVettore(right);
+	this->U.getVettore(up);
+	this->draw_3D_FRU_vect(window, x, y, size, front, right, up);
+}
+void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size) {
+	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
+	this->B.getVettore(back);
+	this->L.getVettore(left);
+	this->D.getVettore(down);
+	this->draw_3D_BLD_rotated_vect(window, x, y, size, back, left, down);
+}
+void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size) {
+	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
+	this->B.getVettore(back);
+	this->L.getVettore(left);
+	this->D.getVettore(down);
+	this->draw_3D_BLD_cutted_vect(window, x, y, size, back, left, down);
+}
+
 //disegno le eventuali freccie sulla visuale del cubo con x, y, size di mossa m
 void Cubo::drawFreccia(sf::RenderWindow &window, int m, float x, float y, float size) {
 	if(0 <= m && m <= 11) {

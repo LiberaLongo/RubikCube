@@ -95,39 +95,39 @@ void Faccia::drawN(sf::RenderWindow &window, float x, float y, float size)
         }
 }
 //get colori tessere, (in caso il chiamante voglia fare il disegno 3D)
-ColoreRGB *Faccia::getCentro(void)
+ColoreRGB* Faccia::getCentro(void)
 {
     return &this->colore;
 }
-ColoreRGB *Faccia::getNord(void)
+ColoreRGB* Faccia::getNord(void)
 {
     return &this->tessere[0][1];
 }
-ColoreRGB *Faccia::getEst(void)
+ColoreRGB* Faccia::getEst(void)
 {
     return &this->tessere[1][2];
 }
-ColoreRGB *Faccia::getSud(void)
+ColoreRGB* Faccia::getSud(void)
 {
     return &this->tessere[2][1];
 }
-ColoreRGB *Faccia::getOvest(void)
+ColoreRGB* Faccia::getOvest(void)
 {
     return &this->tessere[1][0];
 }
-ColoreRGB *Faccia::getNE(void)
+ColoreRGB* Faccia::getNE(void)
 {
     return &this->tessere[0][2];
 }
-ColoreRGB *Faccia::getNW(void)
+ColoreRGB* Faccia::getNW(void)
 {
     return &this->tessere[0][0];
 }
-ColoreRGB *Faccia::getSE(void)
+ColoreRGB* Faccia::getSE(void)
 {
     return &this->tessere[2][2];
 }
-ColoreRGB *Faccia::getSW(void)
+ColoreRGB* Faccia::getSW(void)
 {
     return &this->tessere[2][0];
 }
@@ -156,4 +156,15 @@ void Faccia::getLatoOvest(ColoreRGB *lato[DIM])
     lato[0] = this->getSW();
     lato[1] = this->getOvest();
     lato[2] = this->getNW();
+}
+void Faccia::getVettore(ColoreRGB vector[DIM*DIM]) {	
+	vector[0] = *this->getNW();
+	vector[1] = *this->getNord();
+	vector[2] = *this->getNE();
+	vector[3] = *this->getEst();
+	vector[4] = *this->getSE();
+	vector[5] = *this->getSud();
+	vector[6] = *this->getSW();
+	vector[7] = *this->getOvest();
+	vector[8] = *this->getCentro();
 }
