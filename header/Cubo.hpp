@@ -53,14 +53,16 @@ class Cubo : public DisegnabileI
         //visualizza 3D le visuali usando vettori per colori (per rotazioni del cubo?)
 	void draw_3D_FRU_vect(sf::RenderWindow &window, float x, float y, float size,
 ColoreRGB front[DIM*DIM], ColoreRGB right[DIM*DIM], ColoreRGB up[DIM*DIM]);
-        void draw_3D_BLD_rotated_vect(sf::RenderWindow &window, float x, float y, float size,
-ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM]);
-        void draw_3D_BLD_cutted_vect(sf::RenderWindow &window, float x, float y, float size,
-ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM]);
+        void draw_3D_BLD_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM], sf::Color sfondo);
 	//disegna 3D le visuali "normali"
         void draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size);
-        void draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size);
         void draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size);
+	void draw_upsidedown(sf::RenderWindow &window, float x, float y, float size);
+	void draw_upsidedown_cutted(sf::RenderWindow &window, float x, float y, float size);
+	//inusata ma già implementata prima
+        void draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size);
+	void draw_upsidedown_rotated(sf::RenderWindow &window, float x, float y, float size);
 	//disegna freccia m % 6 (quindi solo una freccia in senso orario,
 	//anche se la mossa è in senso antiorario... modifico dopo forse
 	void drawFreccia(sf::RenderWindow &window, int m, float x, float y, float size);

@@ -157,14 +157,26 @@ void Faccia::getLatoOvest(ColoreRGB *lato[DIM])
     lato[1] = this->getOvest();
     lato[2] = this->getNW();
 }
-void Faccia::getVettore(ColoreRGB vector[DIM*DIM]) {	
-	vector[0] = *this->getNW();
-	vector[1] = *this->getNord();
-	vector[2] = *this->getNE();
-	vector[3] = *this->getEst();
-	vector[4] = *this->getSE();
-	vector[5] = *this->getSud();
-	vector[6] = *this->getSW();
-	vector[7] = *this->getOvest();
+void Faccia::getVettore(ColoreRGB vector[DIM*DIM], int rotazione) {	
+	vector[(0 + rotazione * 2) % 8] = *this->getNW();
+	vector[(1 + rotazione * 2) % 8] = *this->getNord();
+	vector[(2 + rotazione * 2) % 8] = *this->getNE();
+	vector[(3 + rotazione * 2) % 8] = *this->getEst();
+	vector[(4 + rotazione * 2) % 8] = *this->getSE();
+	vector[(5 + rotazione * 2) % 8] = *this->getSud();
+	vector[(6 + rotazione * 2) % 8] = *this->getSW();
+	vector[(7 + rotazione * 2) % 8] = *this->getOvest();
 	vector[8] = *this->getCentro();
 }
+void Faccia::getVettoreAnti(ColoreRGB vector[DIM*DIM], int rotazione) {	
+	vector[(0 + rotazione * 2) % 8] = *this->getNE();
+	vector[(1 + rotazione * 2) % 8] = *this->getNord();
+	vector[(2 + rotazione * 2) % 8] = *this->getNW();
+	vector[(3 + rotazione * 2) % 8] = *this->getOvest();
+	vector[(4 + rotazione * 2) % 8] = *this->getSW();
+	vector[(5 + rotazione * 2) % 8] = *this->getSud();
+	vector[(6 + rotazione * 2) % 8] = *this->getSE();
+	vector[(7 + rotazione * 2) % 8] = *this->getEst();
+	vector[8] = *this->getCentro();
+}
+

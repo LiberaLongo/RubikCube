@@ -61,6 +61,7 @@ public:
     void getLatoEst(ColoreRGB* lato[DIM]);
     void getLatoSud(ColoreRGB* lato[DIM]);
     void getLatoOvest(ColoreRGB* lato[DIM]);
-    void getVettore(ColoreRGB vector[DIM*DIM]);
+    void getVettore(ColoreRGB vector[DIM*DIM], int rotazione);
+    void getVettoreAnti(ColoreRGB vector[DIM*DIM], int rotazione);
 };
 #endif //FACCIA_HPP

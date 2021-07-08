@@ -295,53 +295,13 @@ ColoreRGB front[DIM*DIM], ColoreRGB right[DIM*DIM], ColoreRGB up[DIM*DIM])
     drawTessera3D(window, x - altezza, y - size * 3 / 2, UP, up[7], sfondo, size);
     drawTessera3D(window, x, y - size, UP, up[8], sfondo, size);
 }
-//void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size) {}
-void Cubo::draw_3D_BLD_cutted_vect(sf::RenderWindow &window, float x, float y, float size,
-ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM])
-{
-    //cout << "\n 3D_BLD_cutted: x = " << x << ", y = " << y << "size = " << size;
-    sf::Color sfondo = sf::Color::Cyan;
-    //visuale ottenuta "tagliando il cubo" come fosse una camera su thesims
-    //cutted
-    float altezza = size * sqrt(3) / 2;
-    //BACK -> destra
-    drawTessera3D(window, x + altezza * 2, y - size, DESTRA, back[0], sfondo, size);
-    drawTessera3D(window, x + altezza, y - size * 3 / 2, DESTRA, back[1], sfondo, size);
-    drawTessera3D(window, x, y - size * 2, DESTRA, back[2], sfondo, size);
-    drawTessera3D(window, x, y - size, DESTRA, back[3], sfondo, size);
-    drawTessera3D(window, x, y, DESTRA, back[4], sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, DESTRA, back[5], sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y + size, DESTRA, back[6], sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y, DESTRA, back[7], sfondo, size);
-    drawTessera3D(window, x + altezza, y - size / 2, DESTRA, back[8], sfondo, size);
-    //LEFT -> sinistra
-    drawTessera3D(window, x, y - size * 2, SINISTRA, left[0], sfondo, size);
-    drawTessera3D(window, x - altezza, y - size * 3 / 2, SINISTRA, left[1], sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y - size, SINISTRA, left[2], sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y, SINISTRA, left[3], sfondo, size);
-    drawTessera3D(window, x - altezza * 2, y + size, SINISTRA, left[4], sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, SINISTRA, left[5], sfondo, size);
-    drawTessera3D(window, x, y, SINISTRA, left[6], sfondo, size);
-    drawTessera3D(window, x, y - size, SINISTRA, left[7], sfondo, size);
-    drawTessera3D(window, x - altezza, y - size / 2, SINISTRA, left[8], sfondo, size);
-    //DOWN
-    drawTessera3D(window, x - altezza * 2, y + size, SOTTO, down[0], sfondo, size);
-    drawTessera3D(window, x - altezza, y + size * 3 / 2, SOTTO, down[1], sfondo, size);
-    drawTessera3D(window, x, y + size * 2, SOTTO, down[2], sfondo, size);
-    drawTessera3D(window, x + altezza, y + size * 3 / 2, SOTTO, down[3], sfondo, size);
-    drawTessera3D(window, x + altezza * 2, y + size, SOTTO, down[4], sfondo, size);
-    drawTessera3D(window, x + altezza, y + size / 2, SOTTO, down[5], sfondo, size);
-    drawTessera3D(window, x, y, SOTTO, down[6], sfondo, size);
-    drawTessera3D(window, x - altezza, y + size / 2, SOTTO, down[7], sfondo, size);
-    drawTessera3D(window, x, y + size, SOTTO, down[8], sfondo, size);
-}
-
-void Cubo::draw_3D_BLD_rotated_vect(sf::RenderWindow &window, float x, float y, float size,
-ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM])
+void Cubo::draw_3D_BLD_vect(sf::RenderWindow &window, float x, float y, float size,
+ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM], sf::Color
+ sfondo)
 {
     //cout << "\n 3D_BLD_rotated: x = " << x << ", y = " << y << "size = " << size;
-    sf::Color sfondo = sf::Color::White;
-    //visuale ottenuta ruotando il cubo
+    //se i vettori di B,L,D sono ottenuti da getVettore() è la visuale ruotata.
+    //per la visuale tagliata bisogna considerare quella ruotata e con i numeri delle faccie fare la "rotazione" attorno all'asse del disegno 3D.
     float altezza = size * sqrt(3) / 2;
     //BACK
     drawTessera3D(window, x - altezza * 2, y - size, BACK, back[0], sfondo, size);
@@ -378,26 +338,59 @@ ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM])
 
 void Cubo::draw_3D_FRU(sf::RenderWindow &window, float x, float y, float size) {
 	ColoreRGB front[DIM*DIM], right[DIM*DIM], up[DIM*DIM];
-	this->F.getVettore(front);
-	this->R.getVettore(right);
-	this->U.getVettore(up);
+	this->F.getVettore(front, 0);
+	this->R.getVettore(right, 0);
+	this->U.getVettore(up, 0);
 	this->draw_3D_FRU_vect(window, x, y, size, front, right, up);
 }
+//inusata, ma già programmata
 void Cubo::draw_3D_BLD_rotated(sf::RenderWindow &window, float x, float y, float size) {
+	sf::Color sfondo = sf::Color::White;
 	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
-	this->B.getVettore(back);
-	this->L.getVettore(left);
-	this->D.getVettore(down);
-	this->draw_3D_BLD_rotated_vect(window, x, y, size, back, left, down);
+	this->B.getVettore(back, 0);
+	this->L.getVettore(left, 0);
+	this->D.getVettore(down, 0);
+	this->draw_3D_BLD_vect(window, x, y, size, back, left, down, sfondo);
 }
 void Cubo::draw_3D_BLD_cutted(sf::RenderWindow &window, float x, float y, float size) {
+	sf::Color sfondo = sf::Color::Cyan;
+	//NB per la version cutted Back e left sono switchati
+	//quindi i vettori hanno nomi giusti e leggono facce giuste ...
 	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
-	this->B.getVettore(back);
-	this->L.getVettore(left);
-	this->D.getVettore(down);
-	this->draw_3D_BLD_cutted_vect(window, x, y, size, back, left, down);
+	this->B.getVettoreAnti(back, 0);
+	this->L.getVettoreAnti(left, 0);
+	this->D.getVettoreAnti(down, 1);
+	//... ma la drawn inverte back e left di posizione BLD->LBD
+	this->draw_3D_BLD_vect(window, x, y, size, left, back, down, sfondo);
 }
-
+void Cubo::draw_upsidedown(sf::RenderWindow &window, float x, float y, float size) {
+	//il cubo capovolto con Down verso up
+	ColoreRGB front[DIM*DIM], right[DIM*DIM], up[DIM*DIM];
+	this->L.getVettore(front, 2);
+	this->B.getVettore(right, 2);
+	this->D.getVettore(up, 3);
+	this->draw_3D_FRU_vect(window, x, y, size, front, right, up);
+}
+void Cubo::draw_upsidedown_cutted(sf::RenderWindow &window, float x, float y, float size) {
+	sf::Color sfondo = sf::Color::White;
+	//NB per la version cutted Back e left sono switchati
+	//quindi i vettori hanno nomi giusti e leggono facce giuste ...
+	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
+	this->F.getVettoreAnti(back, 2);
+	this->R.getVettoreAnti(left, 2);
+	this->U.getVettoreAnti(down, 0);
+	this->draw_3D_BLD_vect(window, x, y, size, back, left, down, sfondo);
+}
+void Cubo::draw_upsidedown_rotated(sf::RenderWindow &window, float x, float y, float size) {
+	sf::Color sfondo = sf::Color::White;
+	//quindi i vettori hanno nomi giusti e leggono facce giuste ...
+	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
+	this->F.getVettoreAnti(back, 0);
+	this->R.getVettoreAnti(left, 0);
+	this->U.getVettoreAnti(down, 1);
+	//... ma la drawn inverte back e left di posizione BLD->LBD
+	this->draw_3D_BLD_vect(window, x, y, size, left, back, down, sfondo);
+}
 //disegno le eventuali freccie sulla visuale del cubo con x, y, size di mossa m
 void Cubo::drawFreccia(sf::RenderWindow &window, int m, float x, float y, float size) {
 	if(0 <= m && m <= 11) {
@@ -457,7 +450,8 @@ void Cubo::draw(sf::RenderWindow &window, int m, float x, float y, float size)
 	this->draw2D(window, x+350.f, y+135.f, size * 2 / 3);
 	this->draw_3D_FRU(window, x+150.f, y+160.f, size);
 	this->draw_3D_BLD_cutted(window, x+225.f, y+440.f, size);
-	this->draw_3D_BLD_rotated(window, x+720.f, y+500.f, size / 3);
+	this->draw_upsidedown(window, x+750.f, y+410.f, size / 3);
+	this->draw_upsidedown_cutted(window, x+700.f, y+500.f, size / 3);
 	//un altro FRU più piccolo per le freccie
 	float x_f = x + 640.f;
 	float y_f = y + 410.f;
