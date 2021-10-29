@@ -463,3 +463,15 @@ void Cubo::draw(sf::RenderWindow &window, int m, float x, float y, float size, P
 void Cubo::draw(sf::RenderWindow &window, int m, float size, Punto punti[]) {
 	this->draw(window, m, 0.f, 0.f, size, punti);
 }
+void Cubo::draw(sf::RenderWindow &window, int m) {
+	//scelgo in modo hardcoded size e i punti centri delle visuali
+	float sizeCubo = 50.f;
+	Punto A = Punto(350, 135); //draw2D
+	Punto B = Punto(150, 160); //draw3D_FRU
+	Punto C = Punto(225, 440); //draw3D_BLD_cutted
+	Punto D = Punto(750, 410); //draw_upsidedown
+	Punto E = Punto(700, 500); //draw_upsidedown_cutted
+	Punto F = Punto(640, 400); //FRU e freccie
+	Punto punti[6] = {A, B, C, D, E, F};
+	this->draw(window, m, 0.f, 0.f, sizeCubo, punti);	
+}

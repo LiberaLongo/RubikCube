@@ -69,6 +69,7 @@ ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM], sf::C
         //disegna il cubo
         void draw(sf::RenderWindow &window, int m, float x, float y, float size, Punto punti[]);
         void draw(sf::RenderWindow &window, int m, float size, Punto punti[]);
+        void draw(sf::RenderWindow &window, int m);
 };
 
 #endif //CUBO_HPP
