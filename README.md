@@ -11,6 +11,16 @@ e l'altro dito sullo spigolo2 tra i centri rosso blu giallo))
 2. (la piccola) girando il cubo;
 3. (la grande sotto) "tagliando" il cubo come se vedessimo l'interno di una stanza.
 
+QUINDI se vuoi poter utilizzare il programma anche sfruttando un CUBO REALE devi assicurarti che:
+sopra ci sia la faccia bianca
+di fronte a te la faccia rossa
+a sinistra la faccia blu
+e di conseguenza:
+a destra la faccia verde (verde e blu sono sempre facce opposte)
+la faccia dietro sia quella arancione (rosso e arancione sono sempre facce opposte)
+sotto ci sia la faccia gialla (bianco e giallo sono sempre facce opposte)
+
+
 viene utilizzata la libreria SFML per la grafica in C++.
 
 ## libreria grafica SFML
@@ -50,7 +60,7 @@ spostati sulla cartella del progetto
 `cd RubikCube`
 
 compilare
-`make -f old_cube_makefile`
+`make`
 (per pulire: `make clean`, ma non è necessario per ricompilare)
 
 NB: Il primo tentativo di strutturare i dati è stato con le matrici
