@@ -372,7 +372,7 @@ void Cubo::draw_upsidedown(sf::RenderWindow &window, float x, float y, float siz
 	this->draw_3D_FRU_vect(window, x, y, size, front, right, up);
 }
 void Cubo::draw_upsidedown_cutted(sf::RenderWindow &window, float x, float y, float size) {
-	sf::Color sfondo = sf::Color::White;
+	sf::Color sfondo = sf::Color::Cyan;
 	//NB per la version cutted Back e left sono switchati
 	//quindi i vettori hanno nomi giusti e leggono facce giuste ...
 	ColoreRGB back[DIM*DIM], left[DIM*DIM], down[DIM*DIM];
@@ -445,21 +445,21 @@ void Cubo::drawFreccia(sf::RenderWindow &window, int m, float x, float y, float 
 		freccia2.draw(window);
 	}
 }
-void Cubo::draw(sf::RenderWindow &window, int m, float x, float y, float size)
+void Cubo::draw(sf::RenderWindow &window, int m, float x, float y, float size, Punto punti[])
 {
-	this->draw2D(window, x+350.f, y+135.f, size * 2 / 3);
-	this->draw_3D_FRU(window, x+150.f, y+160.f, size);
-	this->draw_3D_BLD_cutted(window, x+225.f, y+440.f, size);
-	this->draw_upsidedown(window, x+750.f, y+410.f, size / 3);
-	this->draw_upsidedown_cutted(window, x+700.f, y+500.f, size / 3);
+	this->draw2D(window, punti[0].getX(), punti[0].getY(), size * 2 / 3);
+	this->draw_3D_FRU(window, punti[1].getX(), punti[1].getY(), size);
+	this->draw_3D_BLD_cutted(window, punti[2].getX(), punti[2].getY(), size);
+	this->draw_upsidedown(window, punti[3].getX(), punti[3].getY(), size / 3);
+	this->draw_upsidedown_cutted(window, punti[4].getX(), punti[4].getY(), size / 3);
 	//un altro FRU più piccolo per le freccie
-	float x_f = x + 640.f;
-	float y_f = y + 410.f;
+	float x_f = punti[5].getX() + 10.f;
+	float y_f = punti[5].getY() + 10.f;
 	float s_f = size/3;
 	this->draw_3D_FRU(window, x_f, y_f, s_f);
 	//disegno la freccia (del FRU più piccolo) della mossa che ho fatto)
 	this->drawFreccia(window, m, x_f, y_f, s_f); 
 }
-void Cubo::draw(sf::RenderWindow &window, int m) {
-	this->draw(window, m, 0.f, 0.f, 50.f);
+void Cubo::draw(sf::RenderWindow &window, int m, float size, Punto punti[]) {
+	this->draw(window, m, 0.f, 0.f, size, punti);
 }

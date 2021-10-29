@@ -67,8 +67,8 @@ ColoreRGB back[DIM*DIM], ColoreRGB left[DIM*DIM], ColoreRGB down[DIM*DIM], sf::C
 	//anche se la mossa è in senso antiorario... modifico dopo forse
 	void drawFreccia(sf::RenderWindow &window, int m, float x, float y, float size);
         //disegna il cubo
-        void draw(sf::RenderWindow &window, int m, float x, float y, float size);
-        void draw(sf::RenderWindow &window, int m);
+        void draw(sf::RenderWindow &window, int m, float x, float y, float size, Punto punti[]);
+        void draw(sf::RenderWindow &window, int m, float size, Punto punti[]);
 };
 
 #endif //CUBO_HPP

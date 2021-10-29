@@ -53,6 +53,47 @@ int visualeCubo::Run(sf::RenderWindow &App)
     Punto mouseClick;
     bool haCliccato;
     cout << endl;
+    int menu = 0;
+    
+    //testi per comprendere che visuali sono
+
+    //testi e fonts  
+    int charSize = 20;
+    sf::Font Font;
+    if (!Font.loadFromFile("verdanab.ttf"))
+    {
+        std::cerr << "Error loading verdanab.ttf" << std::endl;
+        return EXIT;
+    }
+    //settings dei testi
+    sf::Text testoUp, testoMosse, testoDown, testoCutted;
+    testoUp.setFont(Font);
+    testoUp.setCharacterSize(charSize);
+    testoUp.setString("Up");
+    testoMosse.setFont(Font);
+    testoMosse.setCharacterSize(charSize);
+    testoMosse.setString("Mosse");
+    testoDown.setFont(Font);
+    testoDown.setCharacterSize(charSize);
+    testoDown.setString("Upside down");
+    testoCutted.setFont(Font);
+    testoCutted.setCharacterSize(charSize);
+    testoCutted.setString("Cutted");
+    //setting delle posizioni dei cubi (da modificare per ottenere le posizioni dei testi)
+    float sizeCubo = 50.f;
+    Punto A = Punto(350, 135); //draw2D
+    Punto B = Punto(150, 160); //draw3D_FRU
+    Punto C = Punto(225, 440); //draw3D_BLD_cutted
+    Punto D = Punto(750, 410); //draw_upsidedown
+    Punto E = Punto(700, 500); //draw_upsidedown_cutted
+    Punto F = Punto(640, 400); //FRU e freccie
+    Punto punti[6] = {A, B, C, D, E, F};
+    //posizioni dei testi desunte dai punti
+    testoUp.setPosition({B.getX() - sizeCubo*3, B.getY() - (sizeCubo*3 - 10.f)});
+    testoCutted.setPosition({C.getX() - (sizeCubo*3 + 20.f), C.getY() + sizeCubo*2});
+    testoDown.setPosition({E.getX() - sizeCubo, E.getY() + sizeCubo});
+    testoMosse.setPosition({F.getX() - (sizeCubo + 25.f) , F.getY() - sizeCubo});
+    
     //esegui il programma finchè la finestra è aperta
     while (Running)
     {
@@ -162,7 +203,14 @@ int visualeCubo::Run(sf::RenderWindow &App)
         }
         buttonReset.draw(App);
 	buttonRandomize.draw(App);
-        cubo.draw(App, mossa);
+        cubo.draw(App, mossa, sizeCubo, punti);
+        
+        //i testi di spiegazione delle visuali del cubo:
+        App.draw(testoUp);
+        App.draw(testoDown);
+        App.draw(testoMosse);
+        App.draw(testoCutted);
+        
         //fine del frame corrente
         App.display();
     }
